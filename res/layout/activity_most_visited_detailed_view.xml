@@ -1,0 +1,117 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MostVisitedDetailedView"
+    android:animateLayoutChanges="true" >
+
+	<LinearLayout
+	    android:id="@+id/details_layout"
+	    android:layout_width="wrap_content"
+	    android:layout_height="195dp"
+	    android:animateLayoutChanges="true"
+	    android:background="@color/semi_transparent_background_color"
+	    android:baselineAligned="false"
+	    android:clickable="true"
+	    android:orientation="vertical"
+	    android:paddingTop="10dp"
+	    android:visibility="gone"
+	    tools:context=".MostVisitedDetailedView" >
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal"
+	        android:orientation="horizontal" >
+	        
+	        <ImageButton
+	            android:id="@+id/decrease"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:contentDescription="@string/reduce_button"
+	            android:background="@drawable/custom_button_incr_decr"
+	            android:src="@drawable/down_arrow" />
+	        
+	        <TextView
+	            android:id="@+id/no_of_most_visited"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="4dp"
+	            android:paddingLeft="15dp"
+	            android:paddingRight="15dp"
+	            android:textColor="@color/grey_font"
+	            android:textSize="22sp" />
+	        
+	        <ImageButton
+	            android:id="@+id/increase"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:contentDescription="@string/increase_button"
+	            android:background="@drawable/custom_button_incr_decr"
+	            android:src="@drawable/up_arrow" />
+	        
+	    </LinearLayout>	        	        	        	    	        
+	   
+	    <ListView
+			android:id="@+id/most_visited_list"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="1"
+		    android:choiceMode="singleChoice"
+		    android:padding="5dp" />
+		    		    		    
+	</LinearLayout>
+
+	<RelativeLayout
+	    android:id="@+id/map_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="horizontal"
+	    android:animateLayoutChanges="true" >
+	     
+	    <fragment
+    		android:id="@+id/map"
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		class="com.google.android.gms.maps.SupportMapFragment"/>
+
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginRight="20dp"
+	        android:orientation="vertical" >
+
+		    <View
+		    	android:layout_width="match_parent"
+		    	android:layout_height="13dp"
+		     	android:alpha="0" />
+	
+		    <ImageButton
+		        android:id="@+id/show_details_button"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="-1dp"
+		        android:layout_marginLeft="12dp"
+		        android:alpha="0.70"
+		        android:background="@drawable/custom_button_details"
+		        android:contentDescription="@string/drop_details"
+		        android:src="@drawable/details" />
+		    
+			<ImageButton
+			    android:id="@+id/animate_most_visited"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginBottom="16dp"
+			    android:layout_marginLeft="12dp"
+			    android:alpha="0.70"
+			    android:background="@drawable/custom_button_details"
+			    android:contentDescription="@string/animate_itinerary"
+			    android:src="@drawable/ic_action_play"
+			    android:text="@string/animate_itinerary" />
+	
+		</LinearLayout>			    		
+	</RelativeLayout>	
+	
+ </FrameLayout>

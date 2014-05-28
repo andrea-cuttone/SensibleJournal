@@ -1,0 +1,242 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TodaysItineraryDetailedView"
+    android:animateLayoutChanges="true" >
+
+	<LinearLayout
+	    android:id="@+id/details_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:animateLayoutChanges="true"
+	    android:background="@color/semi_transparent_background_color"
+	    android:clickable="true"
+	    android:orientation="vertical"	    		   
+	    android:visibility="gone"
+	    tools:context=".TodaysItineraryDetailedView" >
+	        
+	    <LinearLayout
+	        android:id="@+id/details_layout_page1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="20dp"
+	        android:layout_marginTop="5dp"
+	        android:animateLayoutChanges="true"
+	        android:orientation="horizontal" >
+	            
+		    <LinearLayout		        
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="5dp"
+		        android:layout_marginRight="20dp"
+		        android:orientation="vertical"
+		        android:animateLayoutChanges="true" >
+		        	         	
+		     		<TextView
+		      		    android:id="@+id/total_distance_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/no_of_unique_places_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/no_of_stops_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/stationary_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/walking_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/biking_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />
+		      				      		
+		      		<TextView
+		      		    android:id="@+id/vehicle_title"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_main_text" />	
+		            
+			</LinearLayout>
+		
+		    <LinearLayout
+		              android:layout_width="wrap_content"
+		              android:layout_height="wrap_content"
+		              android:layout_marginBottom="5dp"
+		              android:orientation="vertical">             
+		      		            		      		
+		      		<TextView
+		      		    android:id="@+id/distance"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textColor="@color/color_secondary_text"
+		      		    android:textSize="14sp"
+		      		    android:gravity="right" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/no_of_unique_places"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textColor="@color/color_secondary_text"
+		      		    android:textSize="14sp"
+		      		    android:gravity="right" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/no_of_stops"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_secondary_text"
+		        		android:gravity="right" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/time_stationary"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textColor="@color/color_secondary_text"
+		      		    android:textSize="14sp"
+		      		    android:gravity="right" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/time_walking"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textColor="@color/color_secondary_text"
+		      		    android:textSize="14sp"
+		      		    android:gravity="right" />
+		      		
+		      		<TextView
+		      		    android:id="@+id/time_biking"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_secondary_text"
+		        		android:gravity="right" />
+		        		
+		        	<TextView
+		      		    android:id="@+id/time_vehicle"
+		      		    android:layout_width="match_parent"
+		      		    android:layout_height="wrap_content"
+		      		    android:textSize="14sp"
+		        		android:textColor="@color/color_secondary_text"
+		        		android:gravity="right" />
+		        			           
+			</LinearLayout>				   
+	    </LinearLayout>  			
+	
+	    <LinearLayout
+		 	android:layout_width="match_parent"
+			android:layout_height="match_parent"	    
+			android:orientation="vertical"
+		    android:baselineAligned="false"
+		    android:gravity="center" >
+		    	       		    
+	        <ImageButton
+		        android:id="@+id/show_more"
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		        android:src="@drawable/down_arrow"             
+            	android:clickable="true"
+            	android:gravity="bottom"
+            	android:background="@drawable/custom_button_next"
+            	android:contentDescription="@string/show_more" />	
+		    
+			<LinearLayout		    	    
+			    android:id="@+id/details_layout_page2"		   
+			    android:visibility="gone"
+			    android:orientation="vertical"
+			  	android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:baselineAligned="false">		        	              
+			
+			    <ListView
+			        android:id="@+id/itinerary_list"
+			        android:layout_width="match_parent"
+			        android:layout_height="0dp"
+			        android:layout_weight="1"
+			        android:choiceMode="singleChoice"
+			        android:padding="5dp" />
+			</LinearLayout>			              				   		    	    		  
+		</LinearLayout> 
+			
+	</LinearLayout>
+
+	<RelativeLayout
+	    android:id="@+id/map_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="horizontal"
+	    android:animateLayoutChanges="true" >
+	     
+	    <fragment
+    		android:id="@+id/map"
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		class="com.google.android.gms.maps.SupportMapFragment"/>
+
+	    <LinearLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginRight="20dp"
+	        android:orientation="vertical" >
+
+		    <View
+		    	android:layout_width="match_parent"
+		    	android:layout_height="13dp"
+		     	android:alpha="0" />
+	
+		    <ImageButton
+		        android:id="@+id/show_details_button"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="-1dp"
+		        android:layout_marginLeft="12dp"
+		        android:alpha="0.70"
+		        android:background="@drawable/custom_button_details"
+		        android:contentDescription="@string/drop_details"
+		        android:src="@drawable/details" />
+		    
+			<ImageButton
+			    android:id="@+id/animate_itinerary"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_marginBottom="16dp"
+			    android:layout_marginLeft="12dp"
+			    android:alpha="0.70"
+			    android:background="@drawable/custom_button_details"
+			    android:contentDescription="@string/animate_itinerary"
+			    android:src="@drawable/ic_action_play"
+			    android:text="@string/animate_itinerary" />
+	
+		</LinearLayout>			    		
+	</RelativeLayout>	
+	
+ </FrameLayout>

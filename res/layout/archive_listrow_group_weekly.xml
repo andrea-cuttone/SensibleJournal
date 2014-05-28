@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+ 	    
+	<CheckedTextView
+	    android:id="@+id/archiveGroup"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="?android:attr/selectableItemBackground"
+	    android:drawableLeft="@drawable/weekly"
+	    android:drawablePadding="10dp"
+	    android:gravity="center|left"
+	    android:paddingLeft="10dp"
+	    android:textAlignment="textEnd"
+	    android:textColor="?android:attr/textColorPrimaryInverse"
+	    android:textSize="22sp" />
+
+ </LinearLayout>
