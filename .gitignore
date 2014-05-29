@@ -1,0 +1,9 @@
+google-play-services_lib/bin/
+google-maps-api-V2/bin/
+cardslib/bin/
+SensibleJournal/bin/
+google-play-services_lib/gen/
+google-maps-api-V2/gen/
+cardslib/gen/
+SensibleJournal/gen/
+.DS_Store
