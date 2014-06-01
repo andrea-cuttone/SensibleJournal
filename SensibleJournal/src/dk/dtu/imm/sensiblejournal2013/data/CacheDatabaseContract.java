@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.data;
+package dk.dtu.imm.sensible.data;
 
 import android.provider.BaseColumns;
 

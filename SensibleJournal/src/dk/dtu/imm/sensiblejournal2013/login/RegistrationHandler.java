@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.login;
+package dk.dtu.imm.sensible.login;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;
@@ -15,9 +15,9 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import dk.dtu.imm.sensible.R;
 
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.MainActivity;
+import dk.dtu.imm.sensible.MainActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

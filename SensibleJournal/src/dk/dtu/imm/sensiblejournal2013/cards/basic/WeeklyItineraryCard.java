@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.cards.basic;
+package dk.dtu.imm.sensible.cards.basic;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
@@ -23,12 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
-import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomThumbCard;
-import dk.dtu.imm.sensiblejournal2013.detailedViews.WeeklyItineraryDetailedView;
-import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensible.cards.tools.CustomHeader;
+import dk.dtu.imm.sensible.cards.tools.CustomThumbCard;
+import dk.dtu.imm.sensible.detailedViews.WeeklyItineraryDetailedView;
+import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.AppFunctions;
 
 /** WEEKLY ITINERARY CARD **/
 public class WeeklyItineraryCard extends Card {	
@@ -146,7 +146,8 @@ public class WeeklyItineraryCard extends Card {
 		    thumbnail.setUrlResource(thumb_resource);
 		            
 		    // Determine the number of stops and...
-		    noOfStops = POI_id.size();
+	        if (POI_id.size()>= 2) noOfStops = POI_id.size()-2;
+	        else noOfStops = POI_id.size();
 		    // ...the number of unique visited places
 		    Set<Integer> tmpSet = new HashSet<Integer>(POI_id);
 		    noOfUniquePlaces = tmpSet.size();

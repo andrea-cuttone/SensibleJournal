@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.cards.basic;
+package dk.dtu.imm.sensible.cards.basic;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
@@ -6,12 +6,12 @@ import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
 import java.util.List;
 import java.util.Locale;
 
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
-import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomThumbCard;
-import dk.dtu.imm.sensiblejournal2013.detailedViews.MyLocationDetailedView;
-import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensible.cards.tools.CustomHeader;
+import dk.dtu.imm.sensible.cards.tools.CustomThumbCard;
+import dk.dtu.imm.sensible.detailedViews.MyLocationDetailedView;
+import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.AppFunctions;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;

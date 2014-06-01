@@ -1,8 +1,8 @@
-package dk.dtu.imm.sensiblejournal2013.usageLog;
+package dk.dtu.imm.sensible.usageLog;
 
-import dk.dtu.imm.sensiblejournal2013.usageLog.LogDatabaseContract.LogEntry;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants.logComponents;
+import dk.dtu.imm.sensible.usageLog.LogDatabaseContract.LogEntry;
+import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.Constants.logComponents;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,12 +13,10 @@ import android.preference.PreferenceManager;
 
 public class LogDbHelper extends SQLiteOpenHelper {
 		
-	private String user_id;
-	
 	public LogDbHelper(Context context) {
 		super(context, Constants.LOG_DB_FILENAME, null, Constants.LOG_DB_VERSION);
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		user_id = sharedPrefs.getString("PREF_UID", null);
+		sharedPrefs.getString("PREF_UID", null);
 	}
 
 	@Override
@@ -49,7 +47,6 @@ public class LogDbHelper extends SQLiteOpenHelper {
 	        long value =  (Long) params[2];
 	        
 	        ContentValues values = new ContentValues();
-    		values.put(LogEntry.COLUMN_USER_ID, user_id);
     		values.put(LogEntry.COLUMN_TIMESTAMP, value);
     		
 	        SQLiteDatabase db = helper.getWritableDatabase();			

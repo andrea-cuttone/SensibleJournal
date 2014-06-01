@@ -1,11 +1,11 @@
-package dk.dtu.imm.sensiblejournal2013.cards.tools;
+package dk.dtu.imm.sensible.cards.tools;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensible.R;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import android.content.Context;
 import android.view.View;

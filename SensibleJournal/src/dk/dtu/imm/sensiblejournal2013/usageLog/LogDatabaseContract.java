@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.usageLog;
+package dk.dtu.imm.sensible.usageLog;
 
 import android.provider.BaseColumns;
 
@@ -10,7 +10,6 @@ public class LogDatabaseContract {
     public static abstract class LogEntry implements BaseColumns {
         public static final String TABLE_NAME = "application_log";
         public static final String COLUMN_ENTRY_ID = "entry_id";
-        public static final String COLUMN_USER_ID = "user_id";
         public static final String COLUMN_EVENT = "event";
         public static final String COLUMN_TIMESTAMP = "timestamp";
         

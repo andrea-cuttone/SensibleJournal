@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.cards.basic;
+package dk.dtu.imm.sensible.cards.basic;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
@@ -22,12 +22,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
-import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomThumbCard;
-import dk.dtu.imm.sensiblejournal2013.detailedViews.MostVisitedDetailedView;
-import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensible.cards.tools.CustomHeader;
+import dk.dtu.imm.sensible.cards.tools.CustomThumbCard;
+import dk.dtu.imm.sensible.detailedViews.MostVisitedDetailedView;
+import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.AppFunctions;
 
 /** MOST VISITED PLACES CARD **/
 public class MostVisitedPlacesCard extends Card{

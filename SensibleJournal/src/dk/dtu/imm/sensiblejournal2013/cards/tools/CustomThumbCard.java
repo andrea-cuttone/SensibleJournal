@@ -1,6 +1,6 @@
-package dk.dtu.imm.sensiblejournal2013.cards.tools;
+package dk.dtu.imm.sensible.cards.tools;
 
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.Constants;
 import it.gmariotti.cardslib.library.internal.CardThumbnail;
 import android.content.Context;
 import android.util.DisplayMetrics;

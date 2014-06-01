@@ -1,8 +1,10 @@
-package dk.dtu.imm.sensiblejournal2013.utilities;
+package dk.dtu.imm.sensible.utilities;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+
+import org.apache.http.client.HttpClient;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
@@ -12,14 +14,14 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
-import dk.dtu.imm.sensiblejournal2013.cards.basic.CommuteCard;
-import dk.dtu.imm.sensiblejournal2013.cards.basic.MostVisitedPlacesCard;
-import dk.dtu.imm.sensiblejournal2013.cards.basic.MyCurrentLocationCard;
-import dk.dtu.imm.sensiblejournal2013.cards.basic.PastStopCard;
-import dk.dtu.imm.sensiblejournal2013.cards.basic.TodaysItineraryCard;
-import dk.dtu.imm.sensiblejournal2013.cards.basic.WeeklyItineraryCard;
-import dk.dtu.imm.sensiblejournal2013.data.CacheDatabaseContract.CacheEntry;
-import dk.dtu.imm.sensiblejournal2013.usageLog.LogDatabaseContract.LogEntry;
+import dk.dtu.imm.sensible.cards.basic.CommuteCard;
+import dk.dtu.imm.sensible.cards.basic.MostVisitedPlacesCard;
+import dk.dtu.imm.sensible.cards.basic.MyCurrentLocationCard;
+import dk.dtu.imm.sensible.cards.basic.PastStopCard;
+import dk.dtu.imm.sensible.cards.basic.TodaysItineraryCard;
+import dk.dtu.imm.sensible.cards.basic.WeeklyItineraryCard;
+import dk.dtu.imm.sensible.data.CacheDatabaseContract.CacheEntry;
+import dk.dtu.imm.sensible.usageLog.LogDatabaseContract.LogEntry;
 
 public class Constants {	
 	
@@ -46,7 +48,6 @@ public class Constants {
 	public static final String SQL_CREATE_LOG_ENTRIES =
 		    "CREATE TABLE IF NOT EXISTS " + LogEntry.TABLE_NAME + "(" +
 		    LogEntry.COLUMN_ENTRY_ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
-		    LogEntry.COLUMN_USER_ID + TEXT_TYPE + COMMA_SEP +
 		    LogEntry.COLUMN_EVENT + TEXT_TYPE + COMMA_SEP +
 		    LogEntry.COLUMN_TIMESTAMP + LONG_TYPE + ")";
 	
@@ -139,5 +140,6 @@ public class Constants {
     public static LinkedList<Date> arrivals;
     public static LinkedList<Date> departures;
     public static LinkedList<String> days;
+	public static HttpClient httpClient;
 	
 }

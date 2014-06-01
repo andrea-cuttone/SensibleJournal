@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.receivers;
+package dk.dtu.imm.sensible.receivers;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -6,9 +6,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.MainActivity;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.MainActivity;
+import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensible.utilities.Constants;
 
 public class NotificationReceiver extends BroadcastReceiver {
 	 @Override

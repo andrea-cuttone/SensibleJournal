@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.archive;
+package dk.dtu.imm.sensible.archive;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,11 +10,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.detailedViews.WeeklyItineraryDetailedView;
-import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
-import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensible.detailedViews.WeeklyItineraryDetailedView;
+import dk.dtu.imm.sensible.usageLog.LogDbHelper;
+import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.AppFunctions;
 import android.location.Location;
 import android.os.Bundle;
 import android.annotation.SuppressLint;

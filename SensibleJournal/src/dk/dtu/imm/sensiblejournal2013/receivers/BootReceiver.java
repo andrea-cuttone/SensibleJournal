@@ -1,7 +1,7 @@
-package dk.dtu.imm.sensiblejournal2013.receivers;
+package dk.dtu.imm.sensible.receivers;
 
-import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensible.utilities.AppFunctions;
+import dk.dtu.imm.sensible.utilities.Constants;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

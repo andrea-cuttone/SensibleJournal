@@ -1,6 +1,6 @@
-package dk.dtu.imm.sensiblejournal2013.login;
+package dk.dtu.imm.sensible.login;
 
-import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensible.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -170,8 +170,7 @@ public class AuthActivity extends Activity {
     }
     
     public static SharedPreferences getSystemPrefs(Context context) {
-    	// this needs to be hardcoded as we need to reuse the sharedprefs from the 1.x version, and the class package has changed
-		return context.getSharedPreferences("dk.dtu.imm.sensible.AuthActivity_system", MODE_PRIVATE);
+		return context.getSharedPreferences(AuthActivity.class.getName() + "_system", MODE_PRIVATE);
 	}
     
 

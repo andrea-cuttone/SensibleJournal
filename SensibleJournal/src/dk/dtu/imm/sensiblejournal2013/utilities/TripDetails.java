@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.utilities;
+package dk.dtu.imm.sensible.utilities;
 
 import java.util.LinkedList;
 import java.util.List;

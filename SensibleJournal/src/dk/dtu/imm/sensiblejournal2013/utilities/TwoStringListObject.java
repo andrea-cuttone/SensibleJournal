@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensiblejournal2013.utilities;
+package dk.dtu.imm.sensible.utilities;
 
 public class TwoStringListObject {
 

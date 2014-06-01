@@ -1,7 +1,8 @@
-package dk.dtu.imm.sensiblejournal2013.login;
+package dk.dtu.imm.sensible.login;
 
-import dk.dtu.imm.sensiblejournal2013.R;
-import dk.dtu.imm.sensiblejournal2013.MainActivity;
+import dk.dtu.imm.sensible.R;
+
+import dk.dtu.imm.sensible.MainActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
