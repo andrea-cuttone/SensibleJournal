@@ -1,7 +1,7 @@
-package dk.dtu.imm.sensible.cards.tools;
+package dk.dtu.imm.sensiblejournal2013.cards.tools;
 
-import dk.dtu.imm.sensible.utilities.Constants;
-import dk.dtu.imm.sensible.utilities.AppFunctions;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import android.content.Context;
 import android.os.AsyncTask;

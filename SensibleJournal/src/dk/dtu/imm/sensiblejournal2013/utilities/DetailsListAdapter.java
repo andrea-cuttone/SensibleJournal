@@ -1,9 +1,9 @@
-package dk.dtu.imm.sensible.utilities;
+package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensiblejournal2013.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

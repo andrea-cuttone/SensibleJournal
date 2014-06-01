@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.cards.tools;
+package dk.dtu.imm.sensiblejournal2013.cards.tools;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 
-import dk.dtu.imm.sensible.R;
-import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 public class CardListFragment extends android.support.v4.app.Fragment implements

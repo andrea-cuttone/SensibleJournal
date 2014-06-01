@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.utilities;
+package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,14 +14,14 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
-import dk.dtu.imm.sensible.cards.basic.CommuteCard;
-import dk.dtu.imm.sensible.cards.basic.MostVisitedPlacesCard;
-import dk.dtu.imm.sensible.cards.basic.MyCurrentLocationCard;
-import dk.dtu.imm.sensible.cards.basic.PastStopCard;
-import dk.dtu.imm.sensible.cards.basic.TodaysItineraryCard;
-import dk.dtu.imm.sensible.cards.basic.WeeklyItineraryCard;
-import dk.dtu.imm.sensible.data.CacheDatabaseContract.CacheEntry;
-import dk.dtu.imm.sensible.usageLog.LogDatabaseContract.LogEntry;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.CommuteCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.MostVisitedPlacesCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.MyCurrentLocationCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.PastStopCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.TodaysItineraryCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.WeeklyItineraryCard;
+import dk.dtu.imm.sensiblejournal2013.data.CacheDatabaseContract.CacheEntry;
+import dk.dtu.imm.sensiblejournal2013.usageLog.LogDatabaseContract.LogEntry;
 
 public class Constants {	
 	
@@ -86,25 +86,25 @@ public class Constants {
 	public static LinkedList<Date> weeklyArrivals = new LinkedList<Date>();
 	public static LinkedList<Date> weeklyDepartures = new LinkedList<Date>();
 
-	public final static String SELECTED_MONTH = "dk.dtu.imm.sensible.SELECTED_MONTH";
-	public final static String SELECTED_YEAR = "dk.dtu.imm.sensible.SELECTED_YEAR";
-	public final static String STOP_LOCATIONS = "dk.dtu.imm.sensible.STOP_LOCATIONS";
-    public final static String STOP_LOCATIONS_ARRIVALS = "dk.dtu.imm.sensible.STOP_LOCATIONS_ARRIVALS";
-    public final static String STOP_LOCATIONS_DEPARTURES = "dk.dtu.imm.sensible.STOP_LOCATIONS_DEPARTURES";
-    public final static String DAYS = "dk.dtu.imm.sensible.DAYS";
-    public final static String POIs = "dk.dtu.imm.sensible.POIs";
-    public final static String TRIP_DETAILS = "dk.dtu.imm.sensible.TRIP_DETAILS";
-    public final static String MY_LOCATION = "dk.dtu.imm.sensible.MY_LOCATION";
-    public final static String PAST_LOCATION = "dk.dtu.imm.sensible.PAST_LOCATION";
-    public final static String PAST_LOCATION_TIME_SPENT = "dk.dtu.imm.sensible.PAST_LOCATION_TIME_SPENT";
-    public final static String SELECTED_DAY = "dk.dtu.imm.sensible.SELECTED_DAY";
-    public final static String SELECTED_WEEK = "dk.dtu.imm.sensible.SELECTED_WEEK";
-    public final static String MOST_VISITED_POIs = "dk.dtu.imm.sensible.MOST_VISITED_POIs";
-    public final static String MOST_VISITED_POIs_DURATIONS = "dk.dtu.imm.sensible.MOST_VISITED_POIs_DURATIONS";
-    public final static String MOST_VISITED_POIs_LOCATIONS = "dk.dtu.imm.sensible.MOST_VISITED_POIs_LOCATIONS";
-    public final static String DISTANCE = "dk.dtu.imm.sensible.DISTANCE";
-    public final static String SPEED = "dk.dtu.imm.sensible.SPEED";
-    public final static String VEHICLE = "dk.dtu.imm.sensible.VEHICLE";
+	public final static String SELECTED_MONTH = "dk.dtu.imm.sensiblejournal2013.SELECTED_MONTH";
+	public final static String SELECTED_YEAR = "dk.dtu.imm.sensiblejournal2013.SELECTED_YEAR";
+	public final static String STOP_LOCATIONS = "dk.dtu.imm.sensiblejournal2013.STOP_LOCATIONS";
+    public final static String STOP_LOCATIONS_ARRIVALS = "dk.dtu.imm.sensiblejournal2013.STOP_LOCATIONS_ARRIVALS";
+    public final static String STOP_LOCATIONS_DEPARTURES = "dk.dtu.imm.sensiblejournal2013.STOP_LOCATIONS_DEPARTURES";
+    public final static String DAYS = "dk.dtu.imm.sensiblejournal2013.DAYS";
+    public final static String POIs = "dk.dtu.imm.sensiblejournal2013.POIs";
+    public final static String TRIP_DETAILS = "dk.dtu.imm.sensiblejournal2013.TRIP_DETAILS";
+    public final static String MY_LOCATION = "dk.dtu.imm.sensiblejournal2013.MY_LOCATION";
+    public final static String PAST_LOCATION = "dk.dtu.imm.sensiblejournal2013.PAST_LOCATION";
+    public final static String PAST_LOCATION_TIME_SPENT = "dk.dtu.imm.sensiblejournal2013.PAST_LOCATION_TIME_SPENT";
+    public final static String SELECTED_DAY = "dk.dtu.imm.sensiblejournal2013.SELECTED_DAY";
+    public final static String SELECTED_WEEK = "dk.dtu.imm.sensiblejournal2013.SELECTED_WEEK";
+    public final static String MOST_VISITED_POIs = "dk.dtu.imm.sensiblejournal2013.MOST_VISITED_POIs";
+    public final static String MOST_VISITED_POIs_DURATIONS = "dk.dtu.imm.sensiblejournal2013.MOST_VISITED_POIs_DURATIONS";
+    public final static String MOST_VISITED_POIs_LOCATIONS = "dk.dtu.imm.sensiblejournal2013.MOST_VISITED_POIs_LOCATIONS";
+    public final static String DISTANCE = "dk.dtu.imm.sensiblejournal2013.DISTANCE";
+    public final static String SPEED = "dk.dtu.imm.sensiblejournal2013.SPEED";
+    public final static String VEHICLE = "dk.dtu.imm.sensiblejournal2013.VEHICLE";
     
     public static int NO_OF_MAX_MOST_VISITED = 10;
     public static int NO_OF_CURR_MOST_VISITED = 3;

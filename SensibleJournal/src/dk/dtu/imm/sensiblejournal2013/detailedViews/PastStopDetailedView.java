@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.detailedViews;
+package dk.dtu.imm.sensiblejournal2013.detailedViews;
 
 import java.util.List;
 import java.util.Locale;
@@ -14,11 +14,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
-import dk.dtu.imm.sensible.R;
-import dk.dtu.imm.sensible.usageLog.LogDbHelper;
-import dk.dtu.imm.sensible.utilities.CustomInfoWindowAdpater;
-import dk.dtu.imm.sensible.utilities.Constants;
-import dk.dtu.imm.sensible.utilities.AppFunctions;
+import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
+import dk.dtu.imm.sensiblejournal2013.utilities.CustomInfoWindowAdpater;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;

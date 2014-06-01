@@ -1,8 +1,8 @@
-package dk.dtu.imm.sensible.usageLog;
+package dk.dtu.imm.sensiblejournal2013.usageLog;
 
-import dk.dtu.imm.sensible.usageLog.LogDatabaseContract.LogEntry;
-import dk.dtu.imm.sensible.utilities.Constants;
-import dk.dtu.imm.sensible.utilities.Constants.logComponents;
+import dk.dtu.imm.sensiblejournal2013.usageLog.LogDatabaseContract.LogEntry;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants.logComponents;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;

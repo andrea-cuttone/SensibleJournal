@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible;
+package dk.dtu.imm.sensiblejournal2013;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,15 +9,15 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
-import dk.dtu.imm.sensible.R;
-import dk.dtu.imm.sensible.archive.ArchiveDaysActivity;
-import dk.dtu.imm.sensible.archive.ArchiveWeeksActivity;
-import dk.dtu.imm.sensible.cards.tools.CardListFragment;
-import dk.dtu.imm.sensible.cards.tools.CardRefreshTask;
-import dk.dtu.imm.sensible.data.DataController;
-import dk.dtu.imm.sensible.usageLog.LogDbHelper;
-import dk.dtu.imm.sensible.utilities.Constants;
-import dk.dtu.imm.sensible.utilities.AppFunctions;
+import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.archive.ArchiveDaysActivity;
+import dk.dtu.imm.sensiblejournal2013.archive.ArchiveWeeksActivity;
+import dk.dtu.imm.sensiblejournal2013.cards.tools.CardListFragment;
+import dk.dtu.imm.sensiblejournal2013.cards.tools.CardRefreshTask;
+import dk.dtu.imm.sensiblejournal2013.data.DataController;
+import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;

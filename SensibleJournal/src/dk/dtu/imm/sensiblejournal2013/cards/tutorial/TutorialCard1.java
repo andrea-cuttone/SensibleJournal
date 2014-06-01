@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.cards.tutorial;
+package dk.dtu.imm.sensiblejournal2013.cards.tutorial;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import dk.dtu.imm.sensible.R;
-import dk.dtu.imm.sensible.cards.tools.CustomHeader;
-import dk.dtu.imm.sensible.cards.tools.CustomThumbCard;
+import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
+import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomThumbCard;
 
 public class TutorialCard1 extends Card {
 	

@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.utilities;
+package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.ui.IconGenerator;
-import dk.dtu.imm.sensible.R;
+import dk.dtu.imm.sensiblejournal2013.R;
 
 public class CustomInfoWindowAdpater implements InfoWindowAdapter {
     private final View mymarkerview;

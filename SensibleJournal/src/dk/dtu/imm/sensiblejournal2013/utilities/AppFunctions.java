@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.utilities;
+package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -26,23 +26,23 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.LatLngBounds.Builder;
 
-import dk.dtu.imm.sensible.R;
-import dk.dtu.imm.sensible.cards.basic.CommuteCard;
-import dk.dtu.imm.sensible.cards.basic.MostVisitedPlacesCard;
-import dk.dtu.imm.sensible.cards.basic.MyCurrentLocationCard;
-import dk.dtu.imm.sensible.cards.basic.PastStopCard;
-import dk.dtu.imm.sensible.cards.basic.TodaysItineraryCard;
-import dk.dtu.imm.sensible.cards.basic.WeeklyItineraryCard;
-import dk.dtu.imm.sensible.cards.tutorial.TutorialCard1;
-import dk.dtu.imm.sensible.cards.tutorial.TutorialCard2;
-import dk.dtu.imm.sensible.cards.tutorial.TutorialCard3;
-import dk.dtu.imm.sensible.cards.tutorial.TutorialCard4;
-import dk.dtu.imm.sensible.cards.tutorial.TutorialCard5;
-import dk.dtu.imm.sensible.data.DataController;
-import dk.dtu.imm.sensible.receivers.DataFetchReceiver;
-import dk.dtu.imm.sensible.receivers.NotificationReceiver;
-import dk.dtu.imm.sensible.receivers.UsageUploadReceiver;
-import dk.dtu.imm.sensible.usageLog.LogDbHelper;
+import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.CommuteCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.MostVisitedPlacesCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.MyCurrentLocationCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.PastStopCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.TodaysItineraryCard;
+import dk.dtu.imm.sensiblejournal2013.cards.basic.WeeklyItineraryCard;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard1;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard2;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard3;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard4;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard5;
+import dk.dtu.imm.sensiblejournal2013.data.DataController;
+import dk.dtu.imm.sensiblejournal2013.receivers.DataFetchReceiver;
+import dk.dtu.imm.sensiblejournal2013.receivers.NotificationReceiver;
+import dk.dtu.imm.sensiblejournal2013.receivers.UsageUploadReceiver;
+import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;

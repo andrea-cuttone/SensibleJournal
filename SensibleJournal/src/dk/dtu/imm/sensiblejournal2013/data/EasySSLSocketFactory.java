@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.data;
+package dk.dtu.imm.sensiblejournal2013.data;
 
 import java.io.IOException;
 import java.net.Socket;

@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.data;
+package dk.dtu.imm.sensiblejournal2013.data;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,10 +16,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dk.dtu.imm.sensible.data.CacheDatabaseContract.CacheEntry;
-import dk.dtu.imm.sensible.usageLog.LogDbHelper;
-import dk.dtu.imm.sensible.utilities.AppFunctions;
-import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.data.CacheDatabaseContract.CacheEntry;
+import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
+import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

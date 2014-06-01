@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.usageLog;
+package dk.dtu.imm.sensiblejournal2013.usageLog;
 
 import android.provider.BaseColumns;
 

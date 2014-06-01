@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.receivers;
+package dk.dtu.imm.sensiblejournal2013.receivers;
 
 import java.io.IOException;
 import org.json.JSONException;
@@ -9,8 +9,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import dk.dtu.imm.sensible.data.DataController;
-import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.data.DataController;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 
 public class DataFetchReceiver extends BroadcastReceiver {
 	

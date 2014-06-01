@@ -1,6 +1,6 @@
-package dk.dtu.imm.sensible.data;
+package dk.dtu.imm.sensiblejournal2013.data;
 
-import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;

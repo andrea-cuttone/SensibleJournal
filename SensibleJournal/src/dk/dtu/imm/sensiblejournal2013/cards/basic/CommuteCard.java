@@ -1,4 +1,4 @@
-package dk.dtu.imm.sensible.cards.basic;
+package dk.dtu.imm.sensiblejournal2013.cards.basic;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
@@ -24,13 +24,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import dk.dtu.imm.sensible.R;
-import dk.dtu.imm.sensible.cards.tools.CustomHeader;
-import dk.dtu.imm.sensible.cards.tools.CustomThumbCard;
-import dk.dtu.imm.sensible.detailedViews.CommuteDetailedView;
-import dk.dtu.imm.sensible.utilities.Constants;
-import dk.dtu.imm.sensible.utilities.AppFunctions;
-import dk.dtu.imm.sensible.utilities.TripDetails;
+import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
+import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomThumbCard;
+import dk.dtu.imm.sensiblejournal2013.detailedViews.CommuteDetailedView;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
+import dk.dtu.imm.sensiblejournal2013.utilities.TripDetails;
 
 /** COMMUTE (LATEST JOURNEY) CARD **/
 public class CommuteCard extends Card {

@@ -1,9 +1,9 @@
-package dk.dtu.imm.sensible.receivers;
+package dk.dtu.imm.sensiblejournal2013.receivers;
 
 import java.io.IOException;
 
-import dk.dtu.imm.sensible.data.DataController;
-import dk.dtu.imm.sensible.utilities.Constants;
+import dk.dtu.imm.sensiblejournal2013.data.DataController;
+import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
