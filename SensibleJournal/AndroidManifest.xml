@@ -52,7 +52,7 @@
         
         <receiver android:name="dk.dtu.imm.sensiblejournal2013.receivers.NotificationReceiver"> </receiver>
         <receiver android:name="dk.dtu.imm.sensiblejournal2013.receivers.DataFetchReceiver"> </receiver>
-        <receiver android:name="dk.dtu.imm.sensible.receivers.UsageUploadReceiver"> </receiver>
+        <receiver android:name="dk.dtu.imm.sensiblejournal2013.receivers.UsageUploadReceiver"> </receiver>
                 
         <receiver android:name="dk.dtu.imm.sensiblejournal2013.receivers.BootReceiver" >
 	   		<intent-filter>
