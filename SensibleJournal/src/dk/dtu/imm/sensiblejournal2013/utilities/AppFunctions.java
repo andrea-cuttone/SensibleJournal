@@ -39,6 +39,7 @@ import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard3;
 import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard4;
 import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard5;
 import dk.dtu.imm.sensiblejournal2013.data.DataController;
+import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.DetailsListAdapter;
 import dk.dtu.imm.sensiblejournal2013.receivers.DataFetchReceiver;
 import dk.dtu.imm.sensiblejournal2013.receivers.NotificationReceiver;
 import dk.dtu.imm.sensiblejournal2013.receivers.UsageUploadReceiver;

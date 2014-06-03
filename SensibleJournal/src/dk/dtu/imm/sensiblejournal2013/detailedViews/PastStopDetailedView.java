@@ -15,8 +15,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.CustomInfoWindowAdpater;
 import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
-import dk.dtu.imm.sensiblejournal2013.utilities.CustomInfoWindowAdpater;
 import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import android.location.Address;

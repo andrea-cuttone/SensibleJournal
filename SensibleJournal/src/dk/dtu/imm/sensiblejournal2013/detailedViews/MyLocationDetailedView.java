@@ -14,8 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.CustomInfoWindowAdpater;
 import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
-import dk.dtu.imm.sensiblejournal2013.utilities.CustomInfoWindowAdpater;
 import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import android.location.Address;
@@ -56,7 +56,6 @@ public class MyLocationDetailedView extends Activity {
      	// Gets to GoogleMap from the MapView and does initialization stuff
      	map = mapView.getMap();
      	map.getUiSettings().setMyLocationButtonEnabled(true);
-	    map.setMyLocationEnabled(true);
 	    map.setInfoWindowAdapter(new CustomInfoWindowAdpater(this));
 	    	    	    
 	 	Constants.progressDialog = ProgressDialog.show(MyLocationDetailedView.this, "", "Loading. Please wait...");

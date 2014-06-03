@@ -147,7 +147,7 @@ public class MainActivity extends FragmentActivity {
 		rClient.getDataFromCache(false, false, 0, POI_ids, locations, arrivals, departures, days);			
                     
         SparseArray<Group> cardGroups = new SparseArray<Group>();
-        Group dailyItineraryGroup = new Group("Daily Itinerary");
+        Group dailyItineraryGroup = new Group("Daily Route");
         String tmpMonth = "";
         for (int i=0; i<days.size(); i++) { 
         	if (!(days.get(i).substring(4, 7) + " " + days.get(i).substring(11, 15)).equals(tmpMonth)) {
@@ -157,7 +157,7 @@ public class MainActivity extends FragmentActivity {
         }        
         cardGroups.append(0, dailyItineraryGroup);
         
-        Group weeklyItineraryGroup = new Group("Weekly Itinerary");
+        Group weeklyItineraryGroup = new Group("Weekly Route");
         String tmpYear = "";
         for (int i=0; i<days.size(); i++) { 
         	if (!(days.get(i).substring(11, 15)).equals(tmpYear)) {

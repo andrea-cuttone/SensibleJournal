@@ -24,9 +24,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 
 import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.CustomInfoWindowAdpater;
+import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.DetailsListAdapter;
 import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
-import dk.dtu.imm.sensiblejournal2013.utilities.CustomInfoWindowAdpater;
-import dk.dtu.imm.sensiblejournal2013.utilities.DetailsListAdapter;
 import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import dk.dtu.imm.sensiblejournal2013.utilities.TripDetails;
@@ -93,7 +93,6 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 		    
 		// Gets the Map fragment from the XML layout and creates it
 		map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();   
-	    map.setMyLocationEnabled(true);
 	    map.setInfoWindowAdapter(new CustomInfoWindowAdpater(this));
 	    map.setOnMarkerClickListener(this);
 	     
