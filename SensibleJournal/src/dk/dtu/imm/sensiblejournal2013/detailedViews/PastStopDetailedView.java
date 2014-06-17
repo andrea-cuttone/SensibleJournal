@@ -38,7 +38,6 @@ public class PastStopDetailedView extends Activity {
 	private MapView mapView;
 	private GoogleMap map;
 	private AppFunctions functions;
-	private long enter_timestamp;
 	private Geocoder geocoder;
 	private List<Address> addresses;
 	
@@ -138,7 +137,8 @@ public class PastStopDetailedView extends Activity {
 		super.onResume();
 		mapView.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.LAST_PLACE, System.currentTimeMillis());
 	}
 	
 	@Override
@@ -149,7 +149,7 @@ public class PastStopDetailedView extends Activity {
 		
 		// Add the time spent in the activity to the log
 		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.LAST_PLACE, System.currentTimeMillis()-enter_timestamp);
+		logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
 	}
  
 	@Override

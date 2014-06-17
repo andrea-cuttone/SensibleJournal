@@ -44,55 +44,57 @@ public class LogDbHelper extends SQLiteOpenHelper {
 	    protected Void doInBackground(Object... params) {
 	    	SQLiteOpenHelper helper = (SQLiteOpenHelper) params[0];
 	    	logComponents logComp = (logComponents) params[1];
-	        long value =  (Long) params[2];
+	        long value =  ((Long) params[2]) / 1000;
 	        
 	        ContentValues values = new ContentValues();
     		values.put(LogEntry.COLUMN_TIMESTAMP, value);
     		
-	        SQLiteDatabase db = helper.getWritableDatabase();			
+	        SQLiteDatabase db = helper.getWritableDatabase();
+
+	        //db.execSQL(Constants.SQL_DELETE_LOG_ENTRIES); db.execSQL(Constants.SQL_CREATE_LOG_ENTRIES);
 			switch (logComp) {
 		    	case MAIN:		    		
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_MAIN");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "MAIN");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;	    	
 		    	case WEEK_ARCHIVE:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_WEEK_ARCHIVE");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "WEEK_ARCHIVE");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case DAY_ARCHIVE:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_DAY_ARCHIVE");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "DAY_ARCHIVE");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case CURRENT_LOC:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_CURRENT_LOC");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "CURRENT_LOC");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case LAST_PLACE:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_LAST_PLACE");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "LAST_PLACE");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case LATEST_JOURNEY:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_LATEST_JOURNEY");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "LATEST_JOURNEY");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case DAILY_ITIN:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_DAILY_ITIN");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "DAILY_ITIN");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case WEEKLY_ITIN:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_WEEKLY_ITIN");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "WEEKLY_ITIN");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
 		    	case MOST_VISITED:
-		    		values.put(LogEntry.COLUMN_EVENT, "TIME_IN_MOST_VISITED");		    		
+		    		values.put(LogEntry.COLUMN_EVENT, "MOST_VISITED");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;
@@ -123,6 +125,11 @@ public class LogDbHelper extends SQLiteOpenHelper {
 		    		return null;
 		    	case AWESOME_MOST_VISITED:
 		    		values.put(LogEntry.COLUMN_EVENT, "LIKED_MOST_VISITED");		    		
+		    		db.insert(LogEntry.TABLE_NAME, null, values);
+		    		db.close();
+		    		return null;
+		    	case PAUSE:
+		    		values.put(LogEntry.COLUMN_EVENT, "PAUSE");		    		
 		    		db.insert(LogEntry.TABLE_NAME, null, values);
 		    		db.close();
 		    		return null;

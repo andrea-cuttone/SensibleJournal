@@ -63,7 +63,6 @@ public class MainActivity extends FragmentActivity {
 	private LinkedList<Date> departures = new LinkedList<Date>();
 	private LinkedList<String> days = new LinkedList<String>();
 	private CardListFragment cardFragment;
-	private long enter_timestamp;
 	private DataController rClient;	
 	
 	public static final String[] options = {
@@ -83,7 +82,7 @@ public class MainActivity extends FragmentActivity {
 		settings.edit();
         		
 		//Print the log data
-		Log.d("Usage Log", functions.getLogData());
+		//Log.d("Usage Log", functions.getLogData());
 				
 		metrics = getResources().getDisplayMetrics();
         Constants.THUMB_WIDTH = metrics.widthPixels;
@@ -183,7 +182,8 @@ public class MainActivity extends FragmentActivity {
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.MAIN, System.currentTimeMillis());
 		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancel(Constants.NOTIFICATION_ID);
 		_initMenu();
@@ -200,7 +200,7 @@ public class MainActivity extends FragmentActivity {
 			Constants.top = (v == null) ? 0 : v.getTop();						
 			// Add the time spent in the activity to the log
 			LogDbHelper logDbHelper = new LogDbHelper(this);
-			logDbHelper.log(Constants.logComponents.MAIN, System.currentTimeMillis()-enter_timestamp);
+			logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
 		} catch (Exception e) {}
 	}
 	
@@ -488,7 +488,7 @@ public class MainActivity extends FragmentActivity {
 						  if(!((Activity) params[0]).isFinishing()) alert.show();
 					  }
 				});
-			} catch (JSONException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return null;

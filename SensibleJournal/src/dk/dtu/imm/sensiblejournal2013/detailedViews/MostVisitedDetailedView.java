@@ -51,7 +51,6 @@ public class MostVisitedDetailedView extends FragmentActivity implements OnMarke
 	private int curr = 0; // used for the animation	
 	private boolean animating = false;
 	private int zoom_move = 0;
-	private long enter_timestamp;
 	private boolean detailsDrawn[] = {false};
 	
 	@SuppressWarnings("unchecked")
@@ -286,7 +285,8 @@ public class MostVisitedDetailedView extends FragmentActivity implements OnMarke
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.MOST_VISITED, System.currentTimeMillis());
 	}
 	
 	@Override
@@ -296,7 +296,7 @@ public class MostVisitedDetailedView extends FragmentActivity implements OnMarke
 		
 		// Add the time spent in the activity to the log
 		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.MOST_VISITED, System.currentTimeMillis()-enter_timestamp);
+		logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
 	}
 	 
 	@Override

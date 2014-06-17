@@ -39,7 +39,6 @@ public class ArchiveWeeksActivity extends Activity {
 	private DateFormat formatter;
 	private Date date;
 	private AppFunctions functions;
-	private long enter_timestamp;
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -186,7 +185,8 @@ public class ArchiveWeeksActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.WEEK_ARCHIVE, System.currentTimeMillis());
 	}
 	
 	@Override
@@ -196,7 +196,7 @@ public class ArchiveWeeksActivity extends Activity {
 		
 		// Add the time spent in the activity to the log
 		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.WEEK_ARCHIVE, System.currentTimeMillis()-enter_timestamp);
+		logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
 	}
 	
 	@Override
