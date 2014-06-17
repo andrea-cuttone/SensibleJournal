@@ -184,9 +184,12 @@ public class DataController {
 			eventBuffer.append(String.format("[%d,\"%s\"],", lastUploadedTimestamp, event));
 			c.moveToNext();
 		}
-		if (eventBuffer.length() > 1)
-			eventBuffer = eventBuffer.deleteCharAt(eventBuffer.length() - 1);
-		eventBuffer.append("]");
+		db.close();
+		if (eventBuffer.length() == 1) {
+			Log.d("Usage log", "No new log entries");
+			return;
+		}
+		eventBuffer = eventBuffer.replace(eventBuffer.length() - 1, eventBuffer.length(), "]");
 		
 		// just upload the raw events
 		String token = AuthActivity.getSystemPrefs(context).getString(RegistrationHandler.PROPERTY_SENSIBLE_TOKEN, "");
