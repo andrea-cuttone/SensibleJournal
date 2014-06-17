@@ -463,7 +463,9 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		// Add the time spent in the activity to the log
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.WEEKLY_ITIN, System.currentTimeMillis());
 	}
 	
 	@Override
@@ -473,7 +475,7 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 		
 		// Add the time spent in the activity to the log
 		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.WEEKLY_ITIN, System.currentTimeMillis()-enter_timestamp);
+		logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
 	}
 	 
 	@Override

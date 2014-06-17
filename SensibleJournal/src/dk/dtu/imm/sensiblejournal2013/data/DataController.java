@@ -4,15 +4,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,14 +29,18 @@ import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
 import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.util.Log;
 
 public class DataController {
+	private static final String LAST_UPLOADED_TIMESTAMP = "LAST_UPLOADED_TIMESTAMP";
 	private static final String BASE_URL_FETCH = "https://www.sensible.dtu.dk/sensible-dtu/connectors/connector_answer/v1/stops_question/stops_answer/";
-	private static final String BASE_URL_UPLOAD = "http://raman.imm.dtu.dk:8083/andrea/sensible-dtu/connectors/connector_funf/usage/";
+	private static final String BASE_URL_UPLOAD = "https://sensible.dtu.dk/sensible-dtu/connectors/connector_funf/usage/";
+	//private static final String BASE_URL_UPLOAD = "http://raman.imm.dtu.dk:8083/andrea/sensible-dtu/connectors/connector_funf/usage/";
 	private Context context;
 	private AppFunctions functions;
 	
@@ -120,10 +128,8 @@ public class DataController {
 	////////METHOD THAT UPLOADS USER'S USAGE LOG DATA TO THE SENSIBLE DTU SERVER //////////
 	public void uploadUsageLog() throws IOException {
 		functions = new AppFunctions(context);
-		String token = "8c093d0a2b563a89ab43290f9a47f2";
-		List<String> event = new LinkedList<String>();
-		List<Float> timestamp = new LinkedList<Float>();
-		long totalTimeInApp = 0;
+		
+		/*long totalTimeInApp = 0;
 		long totalTimeInWeeklyArchive = 0;
 		long totalTimeInDailyArchive = 0;
 		long totalTimeInCurrentLoc = 0;
@@ -154,7 +160,10 @@ public class DataController {
 		String finalTotalTimeInLatestJourney = "";
 		String finalTotalTimeInDailyItin = "";
 		String finalTotalTimeInWeeklyItin = "";
-		String finalTotalTimeInMostVisited = "";
+		String finalTotalTimeInMostVisited = "";*/
+
+		SharedPreferences sharedPrefs = context.getSharedPreferences("com.sensibleDTU.settings", android.content.Context.MODE_PRIVATE);
+		Long lastUploadedTimestamp = sharedPrefs.getLong(LAST_UPLOADED_TIMESTAMP, 0);
 		
 		LogDbHelper logDbHelper = new LogDbHelper(context);
 
@@ -162,18 +171,32 @@ public class DataController {
 		SQLiteDatabase db = logDbHelper.getReadableDatabase();
 
 		// 1. Get the total time in application
-		String query = "SELECT * FROM application_log";
-
-		Cursor c = db.rawQuery(query, null);
+		String query = "SELECT * FROM application_log WHERE timestamp > ?";
+		String[] sqlParams = {lastUploadedTimestamp.toString()};
+		Cursor c = db.rawQuery(query, sqlParams);
 		c.moveToFirst();
 		
+		StringBuffer eventBuffer = new StringBuffer();
+		eventBuffer.append("[");
 		while (!c.isAfterLast()) {
-			event.add(c.getString(1));
-			timestamp.add(c.getFloat(2));
+			String event = c.getString(1);
+			lastUploadedTimestamp = c.getLong(2);
+			eventBuffer.append(String.format("[%d,\"%s\"],", lastUploadedTimestamp, event));
 			c.moveToNext();
 		}
-
-		for (int i = 0; i < timestamp.size(); i++) {
+		if (eventBuffer.length() > 1)
+			eventBuffer = eventBuffer.deleteCharAt(eventBuffer.length() - 1);
+		eventBuffer.append("]");
+		
+		// just upload the raw events
+		String token = AuthActivity.getSystemPrefs(context).getString(RegistrationHandler.PROPERTY_SENSIBLE_TOKEN, "");
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+        nameValuePairs.add(new BasicNameValuePair("bearer_token", token));
+        nameValuePairs.add(new BasicNameValuePair("appid", "sensiblejournal"));
+        nameValuePairs.add(new BasicNameValuePair("events", eventBuffer.toString()));
+        //nameValuePairs.add(new BasicNameValuePair("events", "[[10, \"ZZZ\"]]"));
+		
+		/*for (int i = 0; i < timestamp.size(); i++) {
 
 			if (event.get(i).equals("TIME_IN_WEEK_ARCHIVE")) {
 				clicksForWeeklyArchive++;
@@ -277,17 +300,22 @@ public class DataController {
 		} catch (UnsupportedEncodingException e) {
 			Log.d("Sensible Journal usage upload", "Encoding error in JSON");
 			e.printStackTrace();
-		}
+		}*/
 		
 		// Get an SSL secured HTTP client from the HttpUtils
 		Constants.httpClient = HttpUtils.getNewHttpClient();
-									
 		HttpPost httpPost = new HttpPost(BASE_URL_UPLOAD);
-		httpPost.setHeader("content-type", "application/json");
-		httpPost.setEntity(jsonEntity);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		HttpResponse response = Constants.httpClient.execute(httpPost);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-		System.out.println("Usage log uploaded with message: " + reader.readLine());
+		if (response.getStatusLine().getStatusCode() == org.apache.http.HttpStatus.SC_OK) {
+			Log.d("Usage log", "Usage log uploaded successfully");
+			Editor editor = sharedPrefs.edit();
+			editor.putLong(LAST_UPLOADED_TIMESTAMP, lastUploadedTimestamp);
+			editor.commit();
+		} else {
+			Log.e("Usage log", "Usage log failed:" + response.getStatusLine());
+		}
+		
 	}
 	
 	////////METHOD THAT READ'S THE USER'S MOVEMENT DATA FROM THE SQLITE DATABASE //////////

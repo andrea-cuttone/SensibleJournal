@@ -346,7 +346,8 @@ public class CommuteDetailedView extends FragmentActivity implements OnMarkerCli
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.LATEST_JOURNEY, System.currentTimeMillis());
 	}
 	
 	@Override
@@ -356,7 +357,7 @@ public class CommuteDetailedView extends FragmentActivity implements OnMarkerCli
 		
 		// Add the time spent in the activity to the log
 		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.LATEST_JOURNEY, System.currentTimeMillis()-enter_timestamp);
+		logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
 	}
 	 
 	@Override

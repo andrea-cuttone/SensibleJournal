@@ -1126,7 +1126,6 @@ public class AppFunctions {
 
 	// Method that fetches the usage log data from the database
 	public String getLogData() {
-
 		LogDbHelper logDbHelper = new LogDbHelper(context);
 
 		// Gets the data repository in read mode
