@@ -88,7 +88,7 @@ public class CardListFragment extends android.support.v4.app.Fragment implements
 			Constants.myCurrentLocationCard = null;
 			Constants.pastStopCard = null;
 			Constants.commuteCard = null;
-			Constants.FEED_COUNTER = 0;
+			Constants.FEED_COUNTER = 1;
 			Constants.refreshed = true;
 			try {
 				if(!getActivity().isFinishing()){ Constants.progressDialog = ProgressDialog.show(getActivity(), "", "Loading. Please wait..."); }

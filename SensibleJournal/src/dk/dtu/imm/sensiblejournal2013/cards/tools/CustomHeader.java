@@ -8,6 +8,7 @@ import java.util.Locale;
 import dk.dtu.imm.sensiblejournal2013.R;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class CustomHeader extends CardHeader {
     	
     	if (view!=null){
             TextView t1 = (TextView) view.findViewById(R.id.header_title);
+            Typeface font = Typeface.createFromAsset(getContext().getAssets(), "DroidSerif.ttf");
+            t1.setTypeface(font);
             
             if (type == 0){
             	TextView t2 = (TextView) view.findViewById(R.id.header_date);
@@ -109,36 +112,46 @@ public class CustomHeader extends CardHeader {
             else if (type == 6) {
             	TextView t2 = (TextView) view.findViewById(R.id.header_date);
             	t2.setVisibility(View.GONE);
-            	if (t1!=null)
+            	if (t1!=null) {
                     t1.setText(getContext().getString(R.string.tutorial1_title));
+                    t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
+            	}
             }
             
             else if (type == 7) {
             	TextView t2 = (TextView) view.findViewById(R.id.header_date);
             	t2.setVisibility(View.GONE);
-            	if (t1!=null)
+            	if (t1!=null) {
                     t1.setText(getContext().getString(R.string.tutorial2_title));
+                    t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
+            	}
             }
             
             else if (type == 8) {
             	TextView t2 = (TextView) view.findViewById(R.id.header_date);
             	t2.setVisibility(View.GONE);
-            	if (t1!=null)
+            	if (t1!=null) {
                     t1.setText(getContext().getString(R.string.tutorial3_title));
+                    t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
+            	}
             }
             
             else if (type == 9) {
             	TextView t2 = (TextView) view.findViewById(R.id.header_date);
             	t2.setVisibility(View.GONE);
-            	if (t1!=null)
+            	if (t1!=null) {            		
                     t1.setText(getContext().getString(R.string.tutorial4_title));
+                    t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
+            	}
             }
             
             else if (type == 10) {
             	TextView t2 = (TextView) view.findViewById(R.id.header_date);
             	t2.setVisibility(View.GONE);
-            	if (t1!=null)
+            	if (t1!=null) {
                     t1.setText(getContext().getString(R.string.tutorial5_title));
+                    t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
+            	}
             }                       
         }        
     }

@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		functions = new AppFunctions(this);
 		//functions.reverseCSV();
@@ -144,7 +144,7 @@ public class MainActivity extends FragmentActivity {
 	private void _initMenu() {
 				
 		rClient = new DataController(this);
-		rClient.getDataFromCache(false, false, 0, POI_ids, locations, arrivals, departures, days);			
+		rClient.getDataFromCache(0, false, false, false, true, POI_ids, locations, arrivals, departures, days);			
                     
         SparseArray<Group> cardGroups = new SparseArray<Group>();
         Group dailyItineraryGroup = new Group("Daily Route");

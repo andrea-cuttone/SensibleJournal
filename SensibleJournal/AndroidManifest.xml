@@ -70,6 +70,8 @@
             </intent-filter>
         </receiver>
         
+        
+        
          <!-- AUTHENTICATION -->
         <activity
             android:name="dk.dtu.imm.sensiblejournal2013.login.StartActivity"
@@ -97,7 +99,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
-        </activity>    
+        </activity>            
         
         <activity
             android:name="dk.dtu.imm.sensiblejournal2013.detailedViews.MyLocationDetailedView"

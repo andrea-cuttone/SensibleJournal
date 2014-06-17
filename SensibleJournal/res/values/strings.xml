@@ -56,9 +56,9 @@
     <string name="tutorial5_title">Have fun!</string>
     <string name="tutorial1_text">Observe your daily movements! The top 6 cards provide the latest information about your movements!</string>
     <string name="tutorial2_text">By swiping to the right you have access to all your archived daily and weekly routes!</string>
-    <string name="tutorial3_text">Scrolling down also provides access to previous daily and weekly archived routes!</string>
+    <string name="tutorial3_text">Scrolling down also provides access to older daily archived routes!</string>
     <string name="tutorial4_text">Each card provides a detailed view of your movements and stats. Press the buttons shown above to access further info or visualize your movements!</string>
-    <string name="tutorial5_text">Swipe away the tutorial cards when you are done with them. Enjoy exploring!</string>
+    <string name="tutorial5_text">Swipe away the grey tutorial cards when you are done with them. Enjoy exploring!</string>
                 
     <string name="app_description">SensibleJournal 2014 provides a card-based interface for visualizing your SensibleDTU data\n\n
         							More visualizations coming soon!</string>

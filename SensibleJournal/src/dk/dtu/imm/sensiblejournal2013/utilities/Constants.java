@@ -28,7 +28,7 @@ public class Constants {
 	public final static String APP_NAME = "SensibleJournal";
 	public static final int NOTIFICATION_ID = 1234;
 	public static String DATA_DB_FILENAME = "sensible_journal_cache.db";
-	public static final int DATA_DB_VERSION = 41;
+	public static final int DATA_DB_VERSION = 44;
 	public static String LOG_DB_FILENAME = "sensible_journal_log.db";
 	public static final int LOG_DB_VERSION = 3;
 	private static final String TEXT_TYPE = " TEXT";
@@ -37,13 +37,15 @@ public class Constants {
 	private static final String FLOAT_TYPE = " FLOAT";
 	private static final String COMMA_SEP = ", ";
 	public static final String SQL_CREATE_DATA_ENTRIES =
-	    "CREATE TABLE IF NOT EXISTS " + CacheEntry.TABLE_NAME + "(" +	
+	    "CREATE TABLE IF NOT EXISTS " + CacheEntry.TABLE_NAME + "(" +
+	    CacheEntry.COLUMN_ENTRY_ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
 	    CacheEntry.COLUMN_POI_ID + TEXT_TYPE + COMMA_SEP +
+	    CacheEntry.COLUMN_DAY_NUMBER + INTEGER_TYPE + COMMA_SEP +
+	    CacheEntry.COLUMN_DAY + TEXT_TYPE + COMMA_SEP +
 	    CacheEntry.COLUMN_LATITUDE + FLOAT_TYPE + COMMA_SEP +
 	    CacheEntry.COLUMN_LONGTITUDE + FLOAT_TYPE + COMMA_SEP +
 	    CacheEntry.COLUMN_ARRIVAL + LONG_TYPE + COMMA_SEP + 
-	    CacheEntry.COLUMN_DEPARTURE + LONG_TYPE + COMMA_SEP +
-	    "PRIMARY KEY (" + CacheEntry.COLUMN_ARRIVAL + "))";
+	    CacheEntry.COLUMN_DEPARTURE + LONG_TYPE + ")";
 	
 	public static final String SQL_CREATE_LOG_ENTRIES =
 		    "CREATE TABLE IF NOT EXISTS " + LogEntry.TABLE_NAME + "(" +
@@ -65,8 +67,7 @@ public class Constants {
 	public static CardArrayAdapter mCardArrayAdapter;
 	public static boolean feedLoading = false;
 	public static boolean refreshed = false;
-	public static int FEED_COUNTER = 0;
-	public static int FEED_FETCH_NUMBER = 10;
+	public static int FEED_COUNTER = 1;
 	public static int ANIMATION_DELAY = 3000;
 	public static Location myLocation;
 	public static ProgressDialog progressDialog;
@@ -114,11 +115,7 @@ public class Constants {
     public static int DETAILS_HEIGHT = 195;
     public static String CURR_WEEK = "";
     public static String CURR_YEAR = "";
-    public static String FEED_WEEK = "";
-    public static String FEED_YEAR = "";
     public static boolean firstRun = true;
-    public static String tmpWeekNumber = "";
-    public static String tmpYearNumber = "";
     
     public static int index = 0;
     public static int top = 0;

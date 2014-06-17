@@ -117,7 +117,8 @@ public class TodaysItineraryDetailedView extends FragmentActivity implements OnM
     	markers = new LinkedList<Marker>();    	
     	
     	// Determine the number of stops and...
-	    noOfStops = itineraryPOI_ids.size();
+        if (itineraryPOI_ids.size()>= 2) noOfStops = itineraryPOI_ids.size()-2;
+        else noOfStops = itineraryPOI_ids.size();
 	    // ...the number of unique visited places
 	    Set<Integer> tmpSet = new HashSet<Integer>((List<Integer>) itineraryPOI_ids);
 	    noOfUniquePlaces = tmpSet.size();

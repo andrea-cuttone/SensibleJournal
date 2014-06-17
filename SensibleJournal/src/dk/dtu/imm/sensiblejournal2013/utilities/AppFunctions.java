@@ -2,10 +2,7 @@ package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -85,14 +82,9 @@ public class AppFunctions {
 	private LinkedList<String> days;
 	private DecimalFormat decFormat;
 	private View footerView;
-	private LinkedList<Integer> tmpPOI_id;
-	private LinkedList<Location> tmpItineraryLocations;
-	private LinkedList<Date> tmpArrivals;
-	private LinkedList<Date> tmpDepartures;
 	private String address = "";
 	private int earthRadius = 6371;
 	private List<Thread> threads;
-	private boolean dayFound = false;
 	private DataController rClient;
 	private PendingIntent notificationPendingIntent;
 	private PendingIntent fetchingPendingIntent;
@@ -109,11 +101,6 @@ public class AppFunctions {
 		arrivals = new LinkedList<Date>();
 		departures = new LinkedList<Date>();
 		days = new LinkedList<String>();
-
-		tmpPOI_id = new LinkedList<Integer>();
-		tmpItineraryLocations = new LinkedList<Location>();
-		tmpArrivals = new LinkedList<Date>();
-		tmpDepartures = new LinkedList<Date>();
 	}
 
 	// Method that calculates the details of an itinerary and returns them in a
@@ -123,15 +110,13 @@ public class AppFunctions {
 
 		TripDetails tripDetails = new TripDetails();
 		for (int i = 0; i < itineraryLocations.size() - 1; i++) {
-			float distance = calculateHaversineDistance(
-					(Location) itineraryLocations.get(i),
-					(Location) itineraryLocations.get(i + 1));
+			float distance = calculateHaversineDistance((Location) itineraryLocations.get(i),
+													(Location) itineraryLocations.get(i + 1));
 			tripDetails.addDistance((float) distance);
 			Long duration = (((Date) arrivals.get(i + 1)).getTime() / 1000)
-					- (((Date) departures.get(i)).getTime() / 1000);
+							- (((Date) departures.get(i)).getTime() / 1000);
 			tripDetails.addDuration(duration);
-			float routeSpeed = Float.parseFloat(calculateSpeed(
-					(float) distance, duration));
+			float routeSpeed = Float.parseFloat(calculateSpeed((float) distance, duration));
 			tripDetails.addSpeed(Float.toString(routeSpeed));
 			tripDetails.addVehicle(determineMeansOfTransport(routeSpeed));
 			total_distance_travelled += distance;
@@ -144,21 +129,19 @@ public class AppFunctions {
 	public float calculateHaversineDistance(Location location1,
 			Location location2) {
 
-		// *** Compute the distance between two points using the haversine
-		// formula ***//
+		// *** Compute the distance between two points using the haversine formula ***//
 		/********* Source http://www.movable-type.co.uk/scripts/latlong.html *********/
-		double latitudeDiffRad = Math.toRadians(location2.getLatitude()
-				- location1.getLatitude());
-		double longtitudeDiffRad = Math.toRadians(location2.getLongitude()
-				- location1.getLongitude());
+		double latitudeDiffRad = Math.toRadians(location2.getLatitude() - location1.getLatitude());
+		double longtitudeDiffRad = Math.toRadians(location2.getLongitude() - location1.getLongitude());
 		double latitudeRadOrigin = Math.toRadians(location1.getLatitude());
 		double latitudeRadDestin = Math.toRadians(location2.getLatitude());
 
 		double haversine = Math.sin(latitudeDiffRad / 2)
-				* Math.sin(latitudeDiffRad / 2)
-				+ Math.sin(longtitudeDiffRad / 2)
-				* Math.sin(longtitudeDiffRad / 2) * Math.cos(latitudeRadOrigin)
-				* Math.cos(latitudeRadDestin);
+							* Math.sin(latitudeDiffRad / 2)
+							+ Math.sin(longtitudeDiffRad / 2)
+							* Math.sin(longtitudeDiffRad / 2) 
+							* Math.cos(latitudeRadOrigin)
+							* Math.cos(latitudeRadDestin);
 		double angularDist = 2 * Math.atan2(Math.sqrt(haversine),
 				Math.sqrt(1 - haversine));
 		double distance = earthRadius * angularDist;
@@ -197,11 +180,10 @@ public class AppFunctions {
 	public String getDaysHoursMinutes(long duration) {
 		int days = (int) TimeUnit.SECONDS.toDays(duration);
 		long hours = TimeUnit.SECONDS.toHours(duration) - (days * 24);
-		long minutes = TimeUnit.SECONDS.toMinutes(duration)
-				- (TimeUnit.SECONDS.toHours(duration) * 60);
+		long minutes = TimeUnit.SECONDS.toMinutes(duration) - (TimeUnit.SECONDS.toHours(duration) * 60);
 
 		return days + "d " + String.format("%02d", hours) + "h "
-				+ String.format("%02d", minutes) + "m ";
+							+ String.format("%02d", minutes) + "m";
 	}
 
 	// Method that calculates duration in the format: HH:MM or HH:MM:SS
@@ -214,7 +196,7 @@ public class AppFunctions {
 
 		return getSeconds ? hours + "h " + String.format("%02d", minutes)
 				+ "m " + String.format("%02d", seconds) + "s" : hours + "h "
-				+ String.format("%02d", minutes) + "m ";
+				+ String.format("%02d", minutes) + "m";
 	}
 
 	// Method that fills the commute details on the latest journey card
@@ -244,10 +226,8 @@ public class AppFunctions {
 		total_distance = (TextView) activity.findViewById(R.id.distance);
 		if (total_distance != null) {
 			decFormat = new DecimalFormat("#.#");
-			total_distance_travelled = Float.valueOf(decFormat
-					.format(total_distance_travelled));
-			total_distance.setText(Float.toString(total_distance_travelled)
-					+ " Km");
+			total_distance_travelled = Float.valueOf(decFormat.format(total_distance_travelled));
+			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
 		}
 
 		meansOfTransp = (ImageView) activity.findViewById(R.id.vehicle);
@@ -261,9 +241,9 @@ public class AppFunctions {
 
 	// Method that fills the itinerary details on weekly and daily itinerary cards
 	public void fillItineraryDetails(int noOfUniquePlaces, int noOfStops,
-			float total_distance_travelled, long totalDurationStationary,
-			long totalDurationWalking, long totalDurationBike,
-			long totalDurationVehicle, Activity activity) {
+							float total_distance_travelled, long totalDurationStationary,
+							long totalDurationWalking, long totalDurationBike,
+							long totalDurationVehicle, Activity activity) {
 
 		TextView total_distance_text;
 		TextView no_of_unique_places_text;
@@ -369,10 +349,8 @@ public class AppFunctions {
 		showDetails.setOnClickListener(new Button.OnClickListener() {
 
 			public void onClick(View v) {
-				LinearLayout detailsLayout = (LinearLayout) ((Activity) context)
-						.findViewById(R.id.details_layout);
-				RelativeLayout mapLayout = (RelativeLayout) ((Activity) context)
-						.findViewById(R.id.map_layout);
+				LinearLayout detailsLayout = (LinearLayout) ((Activity) context).findViewById(R.id.details_layout);
+				RelativeLayout mapLayout = (RelativeLayout) ((Activity) context).findViewById(R.id.map_layout);
 
 				// If there are more than two items in the list, create a
 				// minimum height for the layout
@@ -412,31 +390,22 @@ public class AppFunctions {
 					int index = randomGenerator
 							.nextInt(Constants.markerColors.length);
 
-					markers.add(map.addMarker(new MarkerOptions()
-							.position(
-									new LatLng(
-											((Location) locations.get(markerNo))
-													.getLatitude(),
-											((Location) locations.get(markerNo))
-													.getLongitude()))
-							.icon(BitmapDescriptorFactory
-									.defaultMarker(Constants.markerColors[index]))
-							.title(address).snippet("Stayed for: " + duration)));
+					markers.add(map.addMarker(new MarkerOptions().position(new LatLng((
+											(Location) locations.get(markerNo)).getLatitude(),
+											((Location) locations.get(markerNo)).getLongitude()))
+											.icon(BitmapDescriptorFactory
+											.defaultMarker(Constants.markerColors[index]))
+											.title(address).snippet("Stayed for: " + duration)));
 
 					// Add to 2-string holding object so that they can be added
 					// to the list
-					mostVisitedArray.add(new TwoStringListObject(address,
-							duration));
+					mostVisitedArray.add(new TwoStringListObject(address, duration));
 
 					// Move camera to bounds determined by the locations list
-					animateToBounds((List<Location>) locations, map,
-							markerNo + 1);
+					animateToBounds((List<Location>) locations, map, markerNo + 1);
 
-					ListView mostVisitedList = (ListView) ((Activity) context)
-							.findViewById(R.id.most_visited_list);
-					DetailsListAdapter adapter = new DetailsListAdapter(
-							context, mostVisitedArray, null,
-							R.layout.details_list_row);
+					ListView mostVisitedList = (ListView) ((Activity) context).findViewById(R.id.most_visited_list);
+					DetailsListAdapter adapter = new DetailsListAdapter(context, mostVisitedArray, null, R.layout.details_list_row);
 					mostVisitedList.setAdapter(adapter);
 				}
 			}
@@ -447,8 +416,7 @@ public class AppFunctions {
 			public void run() {
 
 				for (int i = 0; i < threads.size(); i++) {
-					if (!threads.get(i).getName()
-							.equals("Add " + Constants.threadNumber)) {
+					if (!threads.get(i).getName().equals("Add " + Constants.threadNumber)) {
 						try {
 							threads.get(i).join();
 						} catch (InterruptedException e) {
@@ -521,10 +489,8 @@ public class AppFunctions {
 				// Remove the POI from the list
 				mostVisitedArray.remove(markerNo);
 
-				ListView mostVisitedList = (ListView) ((Activity) context)
-						.findViewById(R.id.most_visited_list);
-				DetailsListAdapter adapter = new DetailsListAdapter(context,
-						mostVisitedArray, null, R.layout.details_list_row);
+				ListView mostVisitedList = (ListView) ((Activity) context).findViewById(R.id.most_visited_list);
+				DetailsListAdapter adapter = new DetailsListAdapter(context, mostVisitedArray, null, R.layout.details_list_row);
 				mostVisitedList.setAdapter(adapter);
 			}
 		};
@@ -536,8 +502,7 @@ public class AppFunctions {
 				// Wait for other threads to finish, in order to avoid confusion
 				// with markers
 				for (int i = 0; i < threads.size(); i++) {
-					if (!threads.get(i).getName()
-							.equals("Remove " + Constants.threadNumber)) {
+					if (!threads.get(i).getName().equals("Remove " + Constants.threadNumber)) {
 						try {
 							threads.get(i).join();
 						} catch (InterruptedException e) {
@@ -565,8 +530,7 @@ public class AppFunctions {
 			rClient = new DataController(context);
 			Constants.cards = new ArrayList<Card>();
 
-			// /////////////////////////// TUTORIAL CARD 1
-			// ////////////////////////////////
+			///////////////////////////// TUTORIAL CARD 1 //////////////////////////////////
 			SharedPreferences settings = context.getSharedPreferences(
 					"com.sensibleDTU.settings", 0);
 			boolean tutorialCardGone = settings.getBoolean("tutorial1Gone",
@@ -577,8 +541,7 @@ public class AppFunctions {
 				Constants.cards.add(tutorialCard1);
 			}
 
-			// /////////////////////////// TUTORIAL CARD 2
-			// ////////////////////////////////
+			///////////////////////////// TUTORIAL CARD 2 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial2Gone", false);
 			if (!tutorialCardGone) {
 				TutorialCard2 tutorialCard2 = new TutorialCard2(context);
@@ -586,8 +549,7 @@ public class AppFunctions {
 				Constants.cards.add(tutorialCard2);
 			}
 
-			// /////////////////////////// TUTORIAL CARD 3
-			// ////////////////////////////////
+			///////////////////////////// TUTORIAL CARD 3 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial3Gone", false);
 			if (!tutorialCardGone) {
 				TutorialCard3 tutorialCard3 = new TutorialCard3(context);
@@ -595,8 +557,7 @@ public class AppFunctions {
 				Constants.cards.add(tutorialCard3);
 			}
 
-			// /////////////////////////// TUTORIAL CARD 4
-			// ////////////////////////////////
+			///////////////////////////// TUTORIAL CARD 4 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial4Gone", false);
 			if (!tutorialCardGone) {
 				TutorialCard4 tutorialCard4 = new TutorialCard4(context);
@@ -604,8 +565,7 @@ public class AppFunctions {
 				Constants.cards.add(tutorialCard4);
 			}
 
-			// /////////////////////////// TUTORIAL CARD 5
-			// ////////////////////////////////
+			///////////////////////////// TUTORIAL CARD 5 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial5Gone", false);
 			if (!tutorialCardGone) {
 				TutorialCard5 tutorialCard5 = new TutorialCard5(context);
@@ -613,8 +573,7 @@ public class AppFunctions {
 				Constants.cards.add(tutorialCard5);
 			}
 
-			// ///////////////////// MY CURRENT LOCATION CARD
-			// /////////////////////////////
+			/////////////////////// MY CURRENT LOCATION CARD ///////////////////////////////
 			if (Constants.myLocation != null) {
 				if (Constants.myCurrentLocationCard == null) {
 					Constants.myCurrentLocationCard = new MyCurrentLocationCard(
@@ -626,54 +585,46 @@ public class AppFunctions {
 				}
 			}
 
-			// ////////////////////////// PAST STOP CARD
-			// //////////////////////////////////
+			//////////////////////////// PAST STOP CARD	////////////////////////////////////
 			if (Constants.pastStopCard == null) {
 				POI_id = new LinkedList<Integer>();
 				locations = new LinkedList<Location>();
 				arrivals = new LinkedList<Date>();
 				departures = new LinkedList<Date>();
 				days = new LinkedList<String>();
-				rClient.getDataFromCache(false, false, 1, POI_id, locations,
-						arrivals, departures, days);
+				rClient.getDataFromCache(0, true, false, false, false, POI_id, locations, arrivals, departures, days);
 
 				/***
 				 * Only create the card if the user has visited more than 0
 				 * places
 				 ***/
-				/***********************************************************************/
 				if (locations.size() > 0) {
-					Constants.pastStopCard = new PastStopCard(context,
-							locations, arrivals, departures);
+					Constants.pastStopCard = new PastStopCard(context, locations, arrivals, departures);
 					Constants.pastStopCard.setId("past_stop");
 					Constants.cards.add(Constants.pastStopCard);
 				}
 			}
 
-			// /////////////////////////// COMMUTE CARD
-			// ///////////////////////////////////
+			///////////////////////////// COMMUTE CARD /////////////////////////////////////
 			if (Constants.commuteCard == null) {
 				POI_id = new LinkedList<Integer>();
 				locations = new LinkedList<Location>();
 				arrivals = new LinkedList<Date>();
 				departures = new LinkedList<Date>();
 				days = new LinkedList<String>();
-				rClient.getDataFromCache(false, false, 2, POI_id, locations,
-						arrivals, departures, days);
+				rClient.getDataFromCache(0, false, true, false, false, POI_id, locations, arrivals, departures, days);
 
 				/***
 				 * Only create the card if the user has visited more than 1
 				 * places
 				 ***/
-				/***********************************************************************/
 				if (locations.size() > 1) {
 					// Reverse the lists in order to achieve chronological
 					// sequence of the events
 					Collections.reverse(locations);
 					Collections.reverse(arrivals);
 					Collections.reverse(departures);
-					Constants.commuteCard = new CommuteCard(context, locations,
-							arrivals, departures);
+					Constants.commuteCard = new CommuteCard(context, locations,	arrivals, departures);
 					Constants.commuteCard.setId("commute");
 					if (Constants.commuteCard != null) {
 						Constants.cards.add(Constants.commuteCard);
@@ -681,22 +632,19 @@ public class AppFunctions {
 				}
 			}
 
-			// ///////////////////// TODAY'S ITINERARY CARD
-			// /////////////////////////////
+			/////////////////////// TODAY'S ITINERARY CARD ///////////////////////////////
 			if (Constants.todaysItCard == null) {
 				POI_id = new LinkedList<Integer>();
 				locations = new LinkedList<Location>();
 				arrivals = new LinkedList<Date>();
 				departures = new LinkedList<Date>();
 				days = new LinkedList<String>();
-				rClient.getDataFromCache(true, false, 0, POI_id, locations,
-						arrivals, departures, days);
+				rClient.getDataFromCache(1, false, false, false, false, POI_id, locations, arrivals, departures, days);
 
 				/***
 				 * Only create the card if the user has visited more than 0
 				 * places
 				 ***/
-				/***********************************************************************/
 				if (locations.size() > 0) {
 					// Reverse the lists in order to achieve chronological
 					// sequence of the events
@@ -705,9 +653,8 @@ public class AppFunctions {
 					Collections.reverse(arrivals);
 					Collections.reverse(departures);
 					Collections.reverse(days);
-					Constants.todaysItCard = new TodaysItineraryCard(context,
-							days.get(0), POI_id, locations, arrivals,
-							departures, false);
+					Constants.todaysItCard = new TodaysItineraryCard(context, days.get(0), POI_id, locations,
+																				arrivals, departures, false);
 					Constants.todaysItCard.setId("todays_itinerary");
 					if (Constants.todaysItCard != null) {
 						Constants.cards.add(Constants.todaysItCard);
@@ -715,22 +662,19 @@ public class AppFunctions {
 				}
 			}
 
-			// ///////////////////// WEEKLY ITINERARY CARD
-			// /////////////////////////////
+			/////////////////////// WEEKLY ITINERARY CARD ///////////////////////////////
 			if (Constants.weeklyItCard == null) {
 				POI_id = new LinkedList<Integer>();
 				locations = new LinkedList<Location>();
 				arrivals = new LinkedList<Date>();
 				departures = new LinkedList<Date>();
 				days = new LinkedList<String>();
-				rClient.getDataFromCache(false, true, 0, POI_id, locations,
-						arrivals, departures, days);
+				rClient.getDataFromCache(0, false, false, true, false, POI_id, locations, arrivals, departures, days);
 
 				/***
 				 * Only create the card if the user has visited more than 0
 				 * places
 				 ***/
-				/***********************************************************************/
 				if (locations.size() > 0) {
 					// Reverse the lists in order to achieve chronological
 					// sequence of the events
@@ -742,21 +686,13 @@ public class AppFunctions {
 					// Get the week's number and create the card
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(departures.get(0));
-					if (departures.get(0).toString().substring(0, 3)
-							.equals("Sun")) {
+					if (departures.get(0).toString().substring(0, 3).equals("Sun")) {
 						cal.add(Calendar.DAY_OF_YEAR, -1);
 					}
-					Constants.CURR_WEEK = Integer.toString(cal
-							.get(Calendar.WEEK_OF_YEAR));
-					Constants.CURR_YEAR = Integer.toString(cal
-							.get(Calendar.YEAR));
-					Constants.tmpWeekNumber = Constants.CURR_WEEK;
-					Constants.tmpYearNumber = Constants.CURR_YEAR;
-					Constants.FEED_WEEK = Constants.CURR_WEEK;
-					Constants.FEED_YEAR = Constants.CURR_YEAR;
-					Constants.weeklyItCard = new WeeklyItineraryCard(context,
-							Constants.CURR_WEEK, Constants.CURR_YEAR, POI_id,
-							locations, arrivals, departures, false);
+					Constants.CURR_WEEK = Integer.toString(cal.get(Calendar.WEEK_OF_YEAR));
+					Constants.CURR_YEAR = Integer.toString(cal.get(Calendar.YEAR));
+					Constants.weeklyItCard = new WeeklyItineraryCard(context, Constants.CURR_WEEK, 
+								Constants.CURR_YEAR, POI_id, locations, arrivals, departures, false);
 					Constants.weeklyItCard.setId("weekly_itinerary");
 					if (Constants.weeklyItCard != null) {
 						Constants.cards.add(Constants.weeklyItCard);
@@ -764,25 +700,22 @@ public class AppFunctions {
 				}
 			}
 
-			// ///////////////////// MOST VISITED PLACES CARD
-			// /////////////////////////////
+			/////////////////////// MOST VISITED PLACES CARD ///////////////////////////////
 			if (Constants.mostVisitedCard == null) {
 				POI_id = new LinkedList<Integer>();
 				locations = new LinkedList<Location>();
 				arrivals = new LinkedList<Date>();
 				departures = new LinkedList<Date>();
 				days = new LinkedList<String>();
-				rClient.getDataFromCache(false, false, 0, POI_id, locations,
-						arrivals, departures, null);
+				rClient.getDataFromCache(0, false, false, false, true, POI_id, locations, arrivals, departures, null);
 
 				/***
 				 * Only create the card if the user has visited more than 2
 				 * places
 				 ***/
-				/***********************************************************************/
 				if ((new HashSet<Integer>(POI_id).size()) >= Constants.NO_OF_MIN_MOST_VISITED) {
-					Constants.mostVisitedCard = new MostVisitedPlacesCard(
-							context, POI_id, locations, arrivals, departures);
+					Constants.mostVisitedCard = new MostVisitedPlacesCard(context, POI_id, locations, 
+																				arrivals, departures);
 					Constants.mostVisitedCard.setId("most_visited_places");
 					if (Constants.mostVisitedCard != null) {
 						Constants.cards.add(Constants.mostVisitedCard);
@@ -842,11 +775,9 @@ public class AppFunctions {
 	// the user using a "loading" footer in the card list
 	@SuppressLint("SimpleDateFormat")
 	public void fetchNextCards(final int dayNumber) {
-
-		dayFound = false;
-		footerView = ((LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(
-				R.layout.card_feed_footer_view, null, false);
+		
+		footerView = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(
+															R.layout.card_feed_footer_view, null, false);
 
 		final Runnable updateFooter = new Runnable() {
 			@Override
@@ -855,17 +786,15 @@ public class AppFunctions {
 
 				// Only for compatibility with < 19 Level API
 				if (android.os.Build.VERSION.SDK_INT < 19) {
-					Constants.index = Constants.mListView
-							.getFirstVisiblePosition();
+					Constants.index = Constants.mListView.getFirstVisiblePosition();
 					View v = Constants.mListView.getChildAt(0);
 					Constants.top = (v == null) ? 0 : v.getTop();
 					Constants.mListView.setAdapter(Constants.mCardArrayAdapter);
-					Constants.mListView.setSelectionFromTop(Constants.index,
-							Constants.top);
+					Constants.mListView.setSelectionFromTop(Constants.index, Constants.top);
 				}
 			}
 		};
-
+		
 		/** Source: http://mobile.dzone.com/news/android-tutorial-dynamicaly **/
 		// This is run by the main (UI) thread due to the fact that it
 		// updates the UI (only main thread can do that)
@@ -875,236 +804,59 @@ public class AppFunctions {
 				try {
 					Constants.mListView.removeFooterView(footerView);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				if ((!Constants.tmpWeekNumber.equals(Constants.FEED_WEEK))
-						&& (!Constants.FEED_WEEK.equals(Constants.CURR_WEEK))) {
-					// Change the current feed week number
-					Constants.FEED_WEEK = Constants.tmpWeekNumber;
-					Constants.FEED_YEAR = Constants.tmpYearNumber;
-					Constants.cards.add(Constants.weeklyItCard);
-				}
+				
 				Constants.cards.add(Constants.todaysItCard);
-				((ArrayAdapter<Card>) Constants.mCardArrayAdapter)
-						.notifyDataSetChanged();
-				Constants.feedLoading = false;
-
-				if (Constants.FEED_WEEK.equals(Constants.CURR_WEEK))
-					Constants.FEED_WEEK = Constants.tmpWeekNumber;
+				((ArrayAdapter<Card>) Constants.mCardArrayAdapter).notifyDataSetChanged();
+				Constants.feedLoading = false;			
 			}
 		};
-
-		// This is run by a separate thread and is responsible for creating the
-		// new cards
+		
+		// Asynchronously fetch data for next card
 		Runnable loadMoreListItems = new Runnable() {
 			@Override
-			public void run() {
-
-				// Create mutual exclusion for the threads
+			public void run() {		    			    	
+				
 				synchronized (this) {
 					Constants.feedLoading = true;
-					rClient.getDataFromCache(false, false, 0, POI_id,
-							locations, arrivals, departures, days);
-
-					if (days.size() > 0) {
-						String dateString = "";
-						tmpPOI_id = new LinkedList<Integer>();
-						tmpItineraryLocations = new LinkedList<Location>();
-						tmpArrivals = new LinkedList<Date>();
-						tmpDepartures = new LinkedList<Date>();
-						int dayCount = 0;
-						String day = days.get(0);
-						for (int i = 0; i < days.size(); i++) {
-							if (!day.equals(days.get(i))) {
-								dayCount++;
-								day = days.get(i);
-							}
-							if (dayCount == dayNumber) {
-								dayFound = true;
-								dateString = day;
-
-								Calendar cal = Calendar.getInstance();
-								DateFormat formatter = new SimpleDateFormat(
-										"EEE MMM dd yyyy");
-								Date date = null;
-								try {
-									date = formatter.parse(dateString);
-								} catch (ParseException e1) {
-									e1.printStackTrace();
-								}
-								cal.setTime(date);
-
-								if (date.toString().substring(0, 3)
-										.equals("Sun")) {
-									cal.add(Calendar.DAY_OF_YEAR, -1);
-								}
-
-								Constants.tmpWeekNumber = Integer.toString(cal
-										.get(Calendar.WEEK_OF_YEAR));
-								Constants.tmpYearNumber = Integer.toString(cal
-										.get(Calendar.YEAR));
-								tmpPOI_id.add(POI_id.get(i));
-								tmpItineraryLocations.add(locations.get(i));
-								tmpArrivals.add(arrivals.get(i));
-								tmpDepartures.add(departures.get(i));
-								if (!Constants.tmpWeekNumber
-										.equals(Constants.CURR_WEEK)) {
-									// Also add the data to the weekly lists
-									Constants.weeklyPOI_ids.add(POI_id.get(i));
-									Constants.weeklyLocations.add(locations
-											.get(i));
-									Constants.weeklyArrivals.add(arrivals
-											.get(i));
-									Constants.weeklyDepartures.add(departures
-											.get(i));
-								}
-							}
-						}
-
-						if (dayFound == true) {
-							// If any of the below lists is empty, the card
-							// won't be created
-							if ((tmpPOI_id.size() != 0)
-									|| (tmpItineraryLocations.size() != 0)
-									|| (tmpArrivals.size() != 0)
-									|| (tmpDepartures.size() != 0)) {
-
-								// If the "loading" footer is not already there,
-								// place it
-								if (Constants.mListView.getFooterViewsCount() == 0)
-									((Activity) context)
-											.runOnUiThread(updateFooter);
-
-								// Sleep for 1 sec (avoid Google's limit)
-								try {
-									Thread.sleep(1100);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								// Reverse the lists in order to achieve
-								// chronological sequence of the events
-								Collections.reverse(tmpPOI_id);
-								Collections.reverse(tmpItineraryLocations);
-								Collections.reverse(tmpArrivals);
-								Collections.reverse(tmpDepartures);
-								Constants.todaysItCard = new TodaysItineraryCard(
-										context, dateString, tmpPOI_id,
-										tmpItineraryLocations, tmpArrivals,
-										tmpDepartures, true);
-								Constants.todaysItCard
-										.setId("todays_itinerary");
-
-								List<Integer> indices = new LinkedList<Integer>();
-
-								// If the feed week has changed, also create the
-								// weeks summary card
-								if ((!Constants.tmpWeekNumber
-										.equals(Constants.FEED_WEEK))
-										&& (!Constants.FEED_WEEK
-												.equals(Constants.CURR_WEEK))) {
-
-									/******
-									 * Remove consequent duplicates from the
-									 * lists
-									 *******/
-									LinkedList<Integer> resultPOI_id = new LinkedList<Integer>();
-									LinkedList<Location> resulLocations = new LinkedList<Location>();
-									LinkedList<Date> resulArrivals = new LinkedList<Date>();
-									LinkedList<Date> resulDepartures = new LinkedList<Date>();
-
-									for (int i = 0; i < tmpPOI_id.size(); i++) {
-										Constants.weeklyPOI_ids.removeLast();
-										Constants.weeklyLocations.removeLast();
-										Constants.weeklyArrivals.removeLast();
-										Constants.weeklyDepartures.removeLast();
-									}
-
-									for (int i = 1; i < Constants.weeklyPOI_ids
-											.size(); i++) {
-										if ((Constants.weeklyLocations.get(i)
-												.getLatitude() == Constants.weeklyLocations
-												.get(i - 1).getLatitude())
-												&& (Constants.weeklyLocations
-														.get(i).getLongitude() == Constants.weeklyLocations
-														.get(i - 1)
-														.getLongitude()))
-											indices.add(i);
-									}
-
-									for (int i = 0; i < Constants.weeklyPOI_ids
-											.size(); i++) {
-										if (indices.contains(i))
-											continue;
-										else {
-											resultPOI_id
-													.add(Constants.weeklyPOI_ids
-															.get(i));
-											resulLocations
-													.add(Constants.weeklyLocations
-															.get(i));
-											resulArrivals
-													.add(Constants.weeklyArrivals
-															.get(i));
-											resulDepartures
-													.add(Constants.weeklyDepartures
-															.get(i));
-										}
-									}
-									/***********************************************************/
-
-									// Sleep for 1 sec (avoid Google's limit)
-									try {
-										Thread.sleep(1100);
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
-
-									Collections.reverse(resultPOI_id);
-									Collections.reverse(resulLocations);
-									Collections.reverse(resulArrivals);
-									Collections.reverse(resulDepartures);
-									Constants.weeklyItCard = new WeeklyItineraryCard(
-											context, Constants.FEED_WEEK,
-											Constants.FEED_YEAR, resultPOI_id,
-											resulLocations, resulArrivals,
-											resulDepartures, true);
-									Constants.weeklyItCard
-											.setId("weekly_itinerary");
-
-									Constants.weeklyPOI_ids = new LinkedList<Integer>();
-									Constants.weeklyLocations = new LinkedList<Location>();
-									Constants.weeklyArrivals = new LinkedList<Date>();
-									Constants.weeklyDepartures = new LinkedList<Date>();
-
-									for (int i = 0; i < tmpPOI_id.size(); i++) {
-										Constants.weeklyPOI_ids.add(tmpPOI_id
-												.get(i));
-										Constants.weeklyLocations
-												.add(tmpItineraryLocations
-														.get(i));
-										Constants.weeklyArrivals
-												.add(tmpArrivals.get(i));
-										Constants.weeklyDepartures
-												.add(tmpDepartures.get(i));
-									}
-									Collections
-											.reverse(Constants.weeklyPOI_ids);
-									Collections
-											.reverse(Constants.weeklyLocations);
-									Collections
-											.reverse(Constants.weeklyArrivals);
-									Collections
-											.reverse(Constants.weeklyDepartures);
-								}
-							}
-							((Activity) context).runOnUiThread(returnRes);
-						} else
-							Constants.feedLoading = false;
-					} else
-						Constants.feedLoading = false;
+										
+					POI_id = new LinkedList<Integer>();
+					locations = new LinkedList<Location>();
+					arrivals = new LinkedList<Date>();
+					departures = new LinkedList<Date>();
+					days = new LinkedList<String>();
+					rClient.getDataFromCache(dayNumber, false, false, false, false, POI_id, locations, arrivals,
+																								departures, days);
+	
+					if (locations.size() > 0) {
+						// If the "loading" footer is not already there, place it
+						if (Constants.mListView.getFooterViewsCount() == 0)
+							((Activity) context).runOnUiThread(updateFooter);
+						
+						// Sleep for 1.5 sec (avoid Google's limit)
+						try { Thread.sleep(1500);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}				    	
+						
+						// Reverse the lists in order to achieve chronological sequence of the events
+						Collections.reverse(POI_id);
+						Collections.reverse(locations);
+						Collections.reverse(arrivals);
+						Collections.reverse(departures);
+						Collections.reverse(days);
+						Constants.todaysItCard = new TodaysItineraryCard(context, days.get(0), POI_id, locations,
+																					arrivals, departures, true);
+						Constants.todaysItCard.setId("todays_itinerary");
+						
+						((Activity) context).runOnUiThread(returnRes);
+					}
+					else Constants.feedLoading = false;			    			    	
 				}
-			}
+		    }
 		};
-
+		
 		// The thread is started here
 		Thread thread = new Thread(null, loadMoreListItems);
 		thread.start();
@@ -1351,27 +1103,21 @@ public class AppFunctions {
 			awesomeLayout.setBackgroundResource(R.color.awesome_unclicked);
 			awesomeLayout.setClickable(true);
 			awesomeTextView.setText(context.getString(R.string.awesome));
-			awesomeTextView.setTextColor(context.getResources().getColor(
-					R.color.white_font));
+			awesomeTextView.setTextColor(context.getResources().getColor(R.color.white_font));
 			awesomeTextView.setTextSize(14);
-			awesomeTextView.setCompoundDrawablesWithIntrinsicBounds(context
-					.getResources().getDrawable(R.drawable.awesome), null,
-					null, null);
+			awesomeTextView.setCompoundDrawablesWithIntrinsicBounds(context.getResources().getDrawable(R.drawable.awesome), null, null, null);
 		} else {
-			awesomeLayout
-					.setBackgroundResource(R.color.semi_transparent_theme_color);
+			awesomeLayout.setBackgroundResource(R.color.semi_transparent_theme_color);
 			awesomeLayout.setClickable(false);
 			awesomeTextView.setText("Thank you for your feedback!");
-			awesomeTextView.setTextColor(context.getResources().getColor(
-					R.color.white_font));
+			awesomeTextView.setTextColor(context.getResources().getColor(R.color.white_font));
 			awesomeTextView.setTextSize(14);
 			awesomeTextView.setCompoundDrawables(null, null, null, null);
 		}
 
 		awesomeLayout.setOnClickListener(new LinearLayout.OnClickListener() {
 			public void onClick(View v) {
-				awesomeLayout
-						.setBackgroundResource(R.color.semi_transparent_theme_color);
+				awesomeLayout.setBackgroundResource(R.color.semi_transparent_theme_color);
 				awesomeLayout.setClickable(false);
 				awesomeTextView.setText("Thank you for your feedback!");
 				awesomeTextView.setCompoundDrawables(null, null, null, null);
@@ -1379,27 +1125,17 @@ public class AppFunctions {
 				LogDbHelper logDbHelper = new LogDbHelper(context);
 				long awesome_timestamp = System.currentTimeMillis();
 				if (type == 0)
-					logDbHelper.log(
-							Constants.logComponents.AWESOME_MOST_VISITED,
-							awesome_timestamp);
+					logDbHelper.log(Constants.logComponents.AWESOME_MOST_VISITED, awesome_timestamp);
 				else if (type == 1)
-					logDbHelper.log(
-							Constants.logComponents.AWESOME_CURRENT_LOC,
-							awesome_timestamp);
+					logDbHelper.log(Constants.logComponents.AWESOME_CURRENT_LOC, awesome_timestamp);
 				else if (type == 2)
-					logDbHelper.log(Constants.logComponents.AWESOME_DAILY_ITIN,
-							awesome_timestamp);
+					logDbHelper.log(Constants.logComponents.AWESOME_DAILY_ITIN, awesome_timestamp);
 				else if (type == 3)
-					logDbHelper.log(Constants.logComponents.AWESOME_LAST_PLACE,
-							awesome_timestamp);
+					logDbHelper.log(Constants.logComponents.AWESOME_LAST_PLACE, awesome_timestamp);
 				else if (type == 4)
-					logDbHelper.log(
-							Constants.logComponents.AWESOME_LATEST_JOURNEY,
-							awesome_timestamp);
+					logDbHelper.log(Constants.logComponents.AWESOME_LATEST_JOURNEY,	awesome_timestamp);
 				else if (type == 5)
-					logDbHelper.log(
-							Constants.logComponents.AWESOME_WEEKLY_ITIN,
-							awesome_timestamp);
+					logDbHelper.log(Constants.logComponents.AWESOME_WEEKLY_ITIN, awesome_timestamp);
 				awesomeClicked[0] = true;
 			}
 		});
@@ -1414,16 +1150,12 @@ public class AppFunctions {
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		Intent notification = new Intent(context, NotificationReceiver.class);
-		notificationPendingIntent = PendingIntent.getBroadcast(context, 0,
-				notification, PendingIntent.FLAG_CANCEL_CURRENT);
-		alarmManager = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
+		notificationPendingIntent = PendingIntent.getBroadcast(context, 0, notification, PendingIntent.FLAG_CANCEL_CURRENT);
+		alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(notificationPendingIntent);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
-				AlarmManager.INTERVAL_DAY, notificationPendingIntent);
-		// alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-		// 10000, 10000, notificationPendingIntent);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
+																AlarmManager.INTERVAL_DAY, notificationPendingIntent);
+		// alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 10000, 10000, notificationPendingIntent);
 
 		// Set repeating alarm for fetching data from server
 		int hours = 10 + (int) (Math.random() * ((12 - 10) + 1));
@@ -1432,12 +1164,10 @@ public class AppFunctions {
 		calendar.set(Calendar.MINUTE, minutes);
 		calendar.set(Calendar.SECOND, 0);
 		Intent dataFetch = new Intent(context, DataFetchReceiver.class);
-		fetchingPendingIntent = PendingIntent.getBroadcast(context, 0,
-				dataFetch, PendingIntent.FLAG_CANCEL_CURRENT);
+		fetchingPendingIntent = PendingIntent.getBroadcast(context, 0, dataFetch, PendingIntent.FLAG_CANCEL_CURRENT);
 		alarmManager.cancel(fetchingPendingIntent);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
-				AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
+																AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
 		
 		// Set repeating alarm for fetching data from server
 		hours = 17 + (int) (Math.random() * ((19 - 17) + 1));
@@ -1446,11 +1176,9 @@ public class AppFunctions {
 		calendar.set(Calendar.MINUTE, minutes);
 		calendar.set(Calendar.SECOND, 0);
 		Intent usageUpload = new Intent(context, UsageUploadReceiver.class);
-		fetchingPendingIntent = PendingIntent.getBroadcast(context, 0,
-				usageUpload, PendingIntent.FLAG_CANCEL_CURRENT);
+		fetchingPendingIntent = PendingIntent.getBroadcast(context, 0, usageUpload, PendingIntent.FLAG_CANCEL_CURRENT);
 		alarmManager.cancel(fetchingPendingIntent);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
-				AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
+																AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
 	}
 }
