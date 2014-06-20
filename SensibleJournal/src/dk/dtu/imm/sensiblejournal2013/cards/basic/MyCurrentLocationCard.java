@@ -23,7 +23,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
 /** MY CURRENT LOCATION CARD **/
@@ -37,8 +37,7 @@ public class MyCurrentLocationCard extends Card {
     private Location myLocation;
     private List<Address> addresses;
     private CustomThumbCard thumbnail;
-    private LinearLayout awesomeLayout;
-    private TextView awesomeTextView;
+    private Button awesomeButton;
     private boolean[] awesomeClicked = {false};
 
     public MyCurrentLocationCard(Context context, Location myLocation) {
@@ -61,6 +60,7 @@ public class MyCurrentLocationCard extends Card {
             public void onClick(Card card, View view) {
             	Intent intent = new Intent(context, MyLocationDetailedView.class);
                 intent.putExtra(Constants.MY_LOCATION, myLocation);
+                Constants.paused = false;
                 context.startActivity(intent);
             }
         });            
@@ -103,9 +103,8 @@ public class MyCurrentLocationCard extends Card {
     	CardThumbnailView cardThumb = (CardThumbnailView) parent.findViewById(R.id.card_thumbnail_layout);
         cardThumb.addCardThumbnail(thumbnail);
         
-        awesomeLayout = (LinearLayout) view.findViewById(R.id.awesome_layout);
-        awesomeTextView = (TextView) view.findViewById(R.id.awesome);
-        functions.setupAwesomeButton(view, awesomeLayout, awesomeTextView, awesomeClicked, getType());
+        awesomeButton = (Button) view.findViewById(R.id.awesome);
+        functions.setupAwesomeButton(view, awesomeButton, awesomeClicked, getType());
     	
     	if (addresses!=null) {
 	        //Retrieve elements        	

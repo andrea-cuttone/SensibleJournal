@@ -34,8 +34,8 @@ import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard1;
 import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard2;
 import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard3;
 import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard4;
-import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard5;
 import dk.dtu.imm.sensiblejournal2013.data.DataController;
+import dk.dtu.imm.sensiblejournal2013.data.TripDetails;
 import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.DetailsListAdapter;
 import dk.dtu.imm.sensiblejournal2013.receivers.DataFetchReceiver;
 import dk.dtu.imm.sensiblejournal2013.receivers.NotificationReceiver;
@@ -166,9 +166,9 @@ public class AppFunctions {
 
 	// Method to determine the means of transport of a journey.
 	public String determineMeansOfTransport(Float routeSpeed) {
-		if ((routeSpeed > 5) && (routeSpeed < 25.0))
+		if ((routeSpeed > 5) && (routeSpeed < 13.0))
 			return "bike";
-		if ((routeSpeed >= 25.0) && (routeSpeed < 200.0))
+		if ((routeSpeed >= 13.0) && (routeSpeed < 200.0))
 			return "car";
 		if (routeSpeed >= 200.0)
 			return "plane";
@@ -536,42 +536,34 @@ public class AppFunctions {
 			boolean tutorialCardGone = settings.getBoolean("tutorial1Gone",
 					false);
 			if (!tutorialCardGone) {
-				TutorialCard1 tutorialCard1 = new TutorialCard1(context);
-				tutorialCard1.setId("tutorial_card1");
-				Constants.cards.add(tutorialCard1);
+				Constants.tutorialCard1 = new TutorialCard1(context);
+				Constants.tutorialCard1.setId("tutorial_card1");
+				Constants.cards.add(Constants.tutorialCard1);
 			}
 
 			///////////////////////////// TUTORIAL CARD 2 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial2Gone", false);
 			if (!tutorialCardGone) {
-				TutorialCard2 tutorialCard2 = new TutorialCard2(context);
-				tutorialCard2.setId("tutorial_card2");
-				Constants.cards.add(tutorialCard2);
+				Constants.tutorialCard2 = new TutorialCard2(context);
+				Constants.tutorialCard2.setId("tutorial_card2");
+				Constants.cards.add(Constants.tutorialCard2);
 			}
 
 			///////////////////////////// TUTORIAL CARD 3 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial3Gone", false);
 			if (!tutorialCardGone) {
-				TutorialCard3 tutorialCard3 = new TutorialCard3(context);
-				tutorialCard3.setId("tutorial_card3");
-				Constants.cards.add(tutorialCard3);
+				Constants.tutorialCard3 = new TutorialCard3(context);
+				Constants.tutorialCard3.setId("tutorial_card3");
+				Constants.cards.add(Constants.tutorialCard3);
 			}
 
 			///////////////////////////// TUTORIAL CARD 4 //////////////////////////////////
 			tutorialCardGone = settings.getBoolean("tutorial4Gone", false);
 			if (!tutorialCardGone) {
-				TutorialCard4 tutorialCard4 = new TutorialCard4(context);
-				tutorialCard4.setId("tutorial_card4");
-				Constants.cards.add(tutorialCard4);
-			}
-
-			///////////////////////////// TUTORIAL CARD 5 //////////////////////////////////
-			tutorialCardGone = settings.getBoolean("tutorial5Gone", false);
-			if (!tutorialCardGone) {
-				TutorialCard5 tutorialCard5 = new TutorialCard5(context);
-				tutorialCard5.setId("tutorial_card5");
-				Constants.cards.add(tutorialCard5);
-			}
+				Constants.tutorialCard4 = new TutorialCard4(context);
+				Constants.tutorialCard4.setId("tutorial_card4");
+				Constants.cards.add(Constants.tutorialCard4);
+			}			
 
 			/////////////////////// MY CURRENT LOCATION CARD ///////////////////////////////
 			if (Constants.myLocation != null) {
@@ -846,8 +838,13 @@ public class AppFunctions {
 						Collections.reverse(arrivals);
 						Collections.reverse(departures);
 						Collections.reverse(days);
-						Constants.todaysItCard = new TodaysItineraryCard(context, days.get(0), POI_id, locations,
-																					arrivals, departures, true);
+						try{
+							Constants.todaysItCard = new TodaysItineraryCard(context, days.get(0), POI_id, locations,
+																						arrivals, departures, true);
+						} catch(Exception e) {
+							e.printStackTrace();
+							return;						
+						}
 						Constants.todaysItCard.setId("todays_itinerary");
 						
 						((Activity) context).runOnUiThread(returnRes);
@@ -891,15 +888,8 @@ public class AppFunctions {
 		String user_id = "";
 		List<String> event = new LinkedList<String>();
 		List<Float> timestamp = new LinkedList<Float>();
-		long totalTimeInApp = 0;
-		long totalTimeInWeeklyArchive = 0;
-		long totalTimeInDailyArchive = 0;
-		long totalTimeInCurrentLoc = 0;
-		long totalTimeInLastPlace = 0;
-		long totalTimeInLatestJourney = 0;
-		long totalTimeInDailyItin = 0;
-		long totalTimeInWeeklyItin = 0;
-		long totalTimeInMostVisited = 0;
+		int timesPaused = 0;
+		int timesInMain = 0;
 		int clicksForWeeklyArchive = 0;
 		int clicksForDailyArchive = 0;
 		int clicksForCurrentLoc = 0;
@@ -914,15 +904,6 @@ public class AppFunctions {
 		int likesForDailyItin = 0;
 		int likesForWeeklyItin = 0;
 		int likesForMostVisited = 0;
-		String finalTotalTimeInApp = "";
-		String finalTotalTimeInWeeklyArchive = "";
-		String finalTotalTimeInDailyArchive = "";
-		String finalTotalTimeInCurrentLoc = "";
-		String finalTotalTimeInLastPlace = "";
-		String finalTotalTimeInLatestJourney = "";
-		String finalTotalTimeInDailyItin = "";
-		String finalTotalTimeInWeeklyItin = "";
-		String finalTotalTimeInMostVisited = "";
 
 		while (!c.isAfterLast()) {
 			event.add(c.getString(1));
@@ -932,117 +913,34 @@ public class AppFunctions {
 
 		for (int i = 0; i < timestamp.size(); i++) {
 
-			if (event.get(i).equals("TIME_IN_WEEK_ARCHIVE")) {
-				clicksForWeeklyArchive++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInWeeklyArchive += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_DAY_ARCHIVE")) {
-				clicksForDailyArchive++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInDailyArchive += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_CURRENT_LOC")) {
-				clicksForCurrentLoc++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInCurrentLoc += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_LAST_PLACE")) {
-				clicksForLastPlace++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInLastPlace += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_LATEST_JOURNEY")) {
-				clicksForLatestJourney++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInLatestJourney += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_DAILY_ITIN")) {
-				clicksForDailyItin++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInDailyItin += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_WEEKLY_ITIN")) {
-				clicksForWeeklyItin++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInWeeklyItin += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("TIME_IN_MOST_VISITED")) {
-				clicksForMostVisited++;
-				if (timestamp.get(i) < 10000000) {
-					totalTimeInApp += timestamp.get(i);
-					totalTimeInMostVisited += timestamp.get(i);
-				}
-			} else if (event.get(i).equals("LIKED_CURRENT_LOC"))
-				likesForCurrentLoc++;
-			else if (event.get(i).equals("LIKED_LAST_PLACE"))
-				likesForLastPlace++;
-			else if (event.get(i).equals("LIKED_LATEST_JOURNEY"))
-				likesForLatestJourney++;
-			else if (event.get(i).equals("LIKED_DAILY_ITIN"))
-				likesForDailyItin++;
-			else if (event.get(i).equals("LIKED_WEEKLY_ITIN"))
-				likesForWeeklyItin++;
-			else if (event.get(i).equals("LIKED_MOST_VISITED"))
-				likesForMostVisited++;
+			if (event.get(i).equals("WEEK_ARCHIVE")) clicksForWeeklyArchive++;
+			else if (event.get(i).equals("DAY_ARCHIVE")) clicksForDailyArchive++;
+			else if (event.get(i).equals("CURRENT_LOC")) clicksForCurrentLoc++;
+			else if (event.get(i).equals("LAST_PLACE")) clicksForLastPlace++;
+			else if (event.get(i).equals("LATEST_JOURNEY")) clicksForLatestJourney++;
+			else if (event.get(i).equals("DAILY_ITIN")) clicksForDailyItin++;
+			else if (event.get(i).equals("WEEKLY_ITIN")) clicksForWeeklyItin++;
+			else if (event.get(i).equals("MOST_VISITED")) clicksForMostVisited++;
+			else if (event.get(i).equals("LIKED_CURRENT_LOC")) likesForCurrentLoc++;
+			else if (event.get(i).equals("LIKED_LAST_PLACE")) likesForLastPlace++;
+			else if (event.get(i).equals("LIKED_LATEST_JOURNEY")) likesForLatestJourney++;
+			else if (event.get(i).equals("LIKED_DAILY_ITIN")) likesForDailyItin++;
+			else if (event.get(i).equals("LIKED_WEEKLY_ITIN")) likesForWeeklyItin++;
+			else if (event.get(i).equals("LIKED_MOST_VISITED"))	likesForMostVisited++;
+			else if (event.get(i).equals("MAIN")) timesInMain++;
+			else if (event.get(i).equals("PAUSE"))	timesPaused++;
 
-		}
-
-		finalTotalTimeInApp = getHoursMinutes(totalTimeInApp / 1000, true);
-		finalTotalTimeInWeeklyArchive = getHoursMinutes(
-				totalTimeInWeeklyArchive / 1000, true);
-		finalTotalTimeInDailyArchive = getHoursMinutes(
-				totalTimeInDailyArchive / 1000, true);
-		finalTotalTimeInCurrentLoc = getHoursMinutes(
-				totalTimeInCurrentLoc / 1000, true);
-		finalTotalTimeInLastPlace = getHoursMinutes(
-				totalTimeInLastPlace / 1000, true);
-		finalTotalTimeInLatestJourney = getHoursMinutes(
-				totalTimeInLatestJourney / 1000, true);
-		finalTotalTimeInDailyItin = getHoursMinutes(
-				totalTimeInDailyItin / 1000, true);
-		finalTotalTimeInWeeklyItin = getHoursMinutes(
-				totalTimeInWeeklyItin / 1000, true);
-		finalTotalTimeInMostVisited = getHoursMinutes(
-				totalTimeInMostVisited / 1000, true);
+		}	
 
 		String result = "######################## USAGE LOG ##########################"
 				+ "\n" + "User ID: "
 				+ user_id
 				+ "\n"
-				+ "Total time in app: "
-				+ finalTotalTimeInApp
+				+ "Number of times in Main: "
+				+ timesInMain
 				+ "\n"
-				+ "Total time in Weekly Itinerary Archive: "
-				+ finalTotalTimeInWeeklyArchive
-				+ "\n"
-				+ "Total time in Daily Itinerary Archive: "
-				+ finalTotalTimeInDailyArchive
-				+ "\n"
-				+ "Total time in Current Location detailed view: "
-				+ finalTotalTimeInCurrentLoc
-				+ "\n"
-				+ "Total time in Last Place Visited detailed view: "
-				+ finalTotalTimeInLastPlace
-				+ "\n"
-				+ "Total time in Latest Journey detailed view: "
-				+ finalTotalTimeInLatestJourney
-				+ "\n"
-				+ "Total time in Daily Itinerary detailed view: "
-				+ finalTotalTimeInDailyItin
-				+ "\n"
-				+ "Total time in Weekly Itinerary detailed view: "
-				+ finalTotalTimeInWeeklyItin
-				+ "\n"
-				+ "Total time in Most Visited Places detailed view: "
-				+ finalTotalTimeInMostVisited
+				+ "Number of times Paused: "
+				+ timesPaused
 				+ "\n"
 				+ "Number of times in Weekly Itinerary archive: "
 				+ clicksForWeeklyArchive
@@ -1093,49 +991,44 @@ public class AppFunctions {
 		return result;
 	}
 
-	// Method that sets up the "click if useful" button on the cards
-	public void setupAwesomeButton(View view, final LinearLayout awesomeLayout,
-			final TextView awesomeTextView, final boolean[] awesomeClicked,
-			final int type) {
-
+	// Method that sets up the "awesome" button on the cards
+	public void setupAwesomeButton(View view, final Button awesomeButton, final boolean[] awesomeClicked, final int type) {
 		if (awesomeClicked[0] == false) {
-			awesomeLayout.setBackgroundResource(R.color.awesome_unclicked);
-			awesomeLayout.setClickable(true);
-			awesomeTextView.setText(context.getString(R.string.awesome));
-			awesomeTextView.setTextColor(context.getResources().getColor(R.color.white_font));
-			awesomeTextView.setTextSize(14);
-			awesomeTextView.setCompoundDrawablesWithIntrinsicBounds(context.getResources().getDrawable(R.drawable.awesome), null, null, null);
+			awesomeButton.setText(context.getString(R.string.awesome));
+			awesomeButton.setTextColor(context.getResources().getColor(R.color.white_font));
+			awesomeButton.setTextSize(14);
+			awesomeButton.setCompoundDrawablesWithIntrinsicBounds(context.getResources().getDrawable(R.drawable.awesome), null, null, null);
 		} else {
-			awesomeLayout.setBackgroundResource(R.color.semi_transparent_theme_color);
-			awesomeLayout.setClickable(false);
-			awesomeTextView.setText("Thank you for your feedback!");
-			awesomeTextView.setTextColor(context.getResources().getColor(R.color.white_font));
-			awesomeTextView.setTextSize(14);
-			awesomeTextView.setCompoundDrawables(null, null, null, null);
+			awesomeButton.setBackgroundResource(R.color.semi_transparent_theme_color);
+			awesomeButton.setText("Thank you for your feedback!");
+			awesomeButton.setTextColor(context.getResources().getColor(R.color.white_font));
+			awesomeButton.setTextSize(14);
+			awesomeButton.setCompoundDrawables(null, null, null, null);
 		}
 
-		awesomeLayout.setOnClickListener(new LinearLayout.OnClickListener() {
+		awesomeButton.setOnClickListener(new LinearLayout.OnClickListener() {
 			public void onClick(View v) {
-				awesomeLayout.setBackgroundResource(R.color.semi_transparent_theme_color);
-				awesomeLayout.setClickable(false);
-				awesomeTextView.setText("Thank you for your feedback!");
-				awesomeTextView.setCompoundDrawables(null, null, null, null);
+				awesomeButton.setBackgroundResource(R.color.semi_transparent_theme_color);
+				awesomeButton.setText("Thank you for your feedback!");
+				awesomeButton.setCompoundDrawables(null, null, null, null);
 
-				LogDbHelper logDbHelper = new LogDbHelper(context);
-				long awesome_timestamp = System.currentTimeMillis();
-				if (type == 0)
-					logDbHelper.log(Constants.logComponents.AWESOME_MOST_VISITED, awesome_timestamp);
-				else if (type == 1)
-					logDbHelper.log(Constants.logComponents.AWESOME_CURRENT_LOC, awesome_timestamp);
-				else if (type == 2)
-					logDbHelper.log(Constants.logComponents.AWESOME_DAILY_ITIN, awesome_timestamp);
-				else if (type == 3)
-					logDbHelper.log(Constants.logComponents.AWESOME_LAST_PLACE, awesome_timestamp);
-				else if (type == 4)
-					logDbHelper.log(Constants.logComponents.AWESOME_LATEST_JOURNEY,	awesome_timestamp);
-				else if (type == 5)
-					logDbHelper.log(Constants.logComponents.AWESOME_WEEKLY_ITIN, awesome_timestamp);
-				awesomeClicked[0] = true;
+				if (awesomeClicked[0] == false) {
+					LogDbHelper logDbHelper = new LogDbHelper(context);
+					long awesome_timestamp = System.currentTimeMillis();
+					if (type == 0)
+						logDbHelper.log(Constants.logComponents.AWESOME_MOST_VISITED, awesome_timestamp);
+					else if (type == 1)
+						logDbHelper.log(Constants.logComponents.AWESOME_CURRENT_LOC, awesome_timestamp);
+					else if (type == 2)
+						logDbHelper.log(Constants.logComponents.AWESOME_DAILY_ITIN, awesome_timestamp);
+					else if (type == 3)
+						logDbHelper.log(Constants.logComponents.AWESOME_LAST_PLACE, awesome_timestamp);
+					else if (type == 4)
+						logDbHelper.log(Constants.logComponents.AWESOME_LATEST_JOURNEY,	awesome_timestamp);
+					else if (type == 5)
+						logDbHelper.log(Constants.logComponents.AWESOME_WEEKLY_ITIN, awesome_timestamp);
+					awesomeClicked[0] = true;
+				}
 			}
 		});
 	}
@@ -1152,8 +1045,8 @@ public class AppFunctions {
 		notificationPendingIntent = PendingIntent.getBroadcast(context, 0, notification, PendingIntent.FLAG_CANCEL_CURRENT);
 		alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(notificationPendingIntent);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
-																AlarmManager.INTERVAL_DAY, notificationPendingIntent);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 3*AlarmManager.INTERVAL_DAY,
+																	3*AlarmManager.INTERVAL_DAY, notificationPendingIntent);
 		// alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 10000, 10000, notificationPendingIntent);
 
 		// Set repeating alarm for fetching data from server
@@ -1179,5 +1072,5 @@ public class AppFunctions {
 		alarmManager.cancel(fetchingPendingIntent);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
 																AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
-	}
+	}	
 }

@@ -137,8 +137,15 @@ public class PastStopDetailedView extends Activity {
 		super.onResume();
 		mapView.onResume();
 		Constants.appVisible = 1;
+		
 		LogDbHelper logDbHelper = new LogDbHelper(this);
 		logDbHelper.log(Constants.logComponents.LAST_PLACE, System.currentTimeMillis());
+		
+		// If the application was paused...
+		if (Constants.paused) {
+			// ...add the pause time-stamp to the log
+			logDbHelper.log(Constants.logComponents.PAUSE, Constants.timestamp);
+		}
 	}
 	
 	@Override
@@ -147,9 +154,8 @@ public class PastStopDetailedView extends Activity {
 		mapView.onPause();
 		Constants.appVisible = 0;
 		
-		// Add the time spent in the activity to the log
-		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
+		Constants.timestamp = System.currentTimeMillis();
+		Constants.paused = true;
 	}
  
 	@Override

@@ -67,24 +67,13 @@
 		    android:layout_height="match_parent"
 		    android:layout_marginTop="5dp" />
 		
-		<LinearLayout
-			android:id="@+id/awesome_layout"
-			android:layout_width="140dp"
-			android:layout_height="36dp"
-			android:clickable="true"
-			android:onClick="awesomeClicked"
-			android:orientation="vertical"
-			android:layout_gravity="bottom|right" >
-		
-			<TextView
-			    android:id="@+id/awesome"
-			    android:layout_width="wrap_content"
-			    android:layout_height="match_parent"
-			    android:layout_gravity="center_horizontal"
-			    android:gravity="center"
-				android:drawablePadding="2dp"
-			    android:textSize="14sp" />
-		</LinearLayout>				           
+			<Button
+				android:id="@+id/awesome"
+				android:layout_width="wrap_content"
+				android:layout_height="45dp"
+				android:layout_gravity="bottom|right"
+				android:gravity="center"
+				android:textSize="14sp" />			           
 	</FrameLayout>
 		
 </LinearLayout>

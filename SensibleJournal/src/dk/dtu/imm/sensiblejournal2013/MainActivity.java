@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
-import org.json.JSONException;
-
 import dk.dtu.imm.sensiblejournal2013.R;
 import dk.dtu.imm.sensiblejournal2013.archive.ArchiveDaysActivity;
 import dk.dtu.imm.sensiblejournal2013.archive.ArchiveWeeksActivity;
@@ -82,7 +80,7 @@ public class MainActivity extends FragmentActivity {
 		settings.edit();
         		
 		//Print the log data
-		//Log.d("Usage Log", functions.getLogData());
+		Log.d("Usage Log", functions.getLogData());
 				
 		metrics = getResources().getDisplayMetrics();
         Constants.THUMB_WIDTH = metrics.widthPixels;
@@ -131,6 +129,10 @@ public class MainActivity extends FragmentActivity {
             editor.putBoolean("firstExec", false);            
             editor.commit();
 		}
+		
+		// When the app opens, fetch data		
+		new Request().execute(this);
+		//new UploadToServerAsync().execute(this);
 	}
 	
 	// Check for internet connection
@@ -182,11 +184,13 @@ public class MainActivity extends FragmentActivity {
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.MAIN, System.currentTimeMillis());
 		NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.cancel(Constants.NOTIFICATION_ID);
 		_initMenu();
+		
+		// Log the application launch		
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.MAIN, System.currentTimeMillis());
 	}
 	
 	@Override
@@ -197,11 +201,17 @@ public class MainActivity extends FragmentActivity {
 			// save index and top position
 			Constants.index = Constants.mListView.getFirstVisiblePosition();
 			View v = Constants.mListView.getChildAt(0);
-			Constants.top = (v == null) ? 0 : v.getTop();						
-			// Add the time spent in the activity to the log
+			Constants.top = (v == null) ? 0 : v.getTop();									
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// If the application is paused...
+		if (Constants.paused) {
+			// ...add the pause time-stamp to the log
 			LogDbHelper logDbHelper = new LogDbHelper(this);
 			logDbHelper.log(Constants.logComponents.PAUSE, System.currentTimeMillis());
-		} catch (Exception e) {}
+		}
 	}
 	
 	@Override
@@ -336,6 +346,7 @@ public class MainActivity extends FragmentActivity {
 						intent.putExtra(Constants.STOP_LOCATIONS_DEPARTURES, selectedDepartures);
 						intent.putExtra(Constants.DAYS, selectedDays);
 						intent.putExtra(Constants.POIs, selectedPOIs);
+						Constants.paused = false;
 						startActivity(intent);
 					}
 					else if (groupPosition == 1) {
@@ -365,6 +376,7 @@ public class MainActivity extends FragmentActivity {
 						intent.putExtra(Constants.STOP_LOCATIONS_DEPARTURES, selectedDepartures);
 						intent.putExtra(Constants.DAYS, selectedDays);
 						intent.putExtra(Constants.POIs, selectedPOIs);
+						Constants.paused = false;
 						startActivity(intent);
 					}
 				}

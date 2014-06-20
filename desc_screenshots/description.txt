@@ -1,0 +1,8 @@
+SensibleJournal creates dynamic, interactive visualisations of your data collected in the SensibleDTU project: http://www.sensible.dtu.dk/
+
+The 2014 version (2.0) provides an alternatice, card-feed based user interface, showing your daily movements and visited places on minimaps placed on cards.
+Each card can be tapped to fire-up a more detailed, interactive view of your information. Access your history from the application's side-menu and enjoy exploring!
+
+More visualizations coming soon!
+
+Please send questions, suggestions, problem reports to sensible_help@imm.dtu.dk

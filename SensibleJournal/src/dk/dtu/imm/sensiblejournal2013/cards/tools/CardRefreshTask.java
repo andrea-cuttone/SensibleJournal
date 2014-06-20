@@ -28,7 +28,7 @@ public class CardRefreshTask extends AsyncTask<Void, Void, Void> {
 		
 		if (Constants.mListView != null){
 		    Constants.mCardArrayAdapter = new CardArrayAdapter(context, Constants.cards);
-		    Constants.mCardArrayAdapter.setInnerViewTypeCount(11);
+		    Constants.mCardArrayAdapter.setInnerViewTypeCount(10);
 		    Constants.feedLoading = false;
 		    
 		    Constants.mListView.setOnScrollListener( new SwipeOnScrollListener() {

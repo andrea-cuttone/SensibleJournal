@@ -24,12 +24,12 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 
 import dk.dtu.imm.sensiblejournal2013.R;
+import dk.dtu.imm.sensiblejournal2013.data.TripDetails;
 import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.CustomInfoWindowAdpater;
 import dk.dtu.imm.sensiblejournal2013.detailedViews.utilities.DetailsListAdapter;
 import dk.dtu.imm.sensiblejournal2013.usageLog.LogDbHelper;
 import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.TripDetails;
 import dk.dtu.imm.sensiblejournal2013.utilities.TwoStringListObject;
 import android.location.Address;
 import android.location.Geocoder;
@@ -80,7 +80,6 @@ public class TodaysItineraryDetailedView extends FragmentActivity implements OnM
 	private long totalDurationWalking = 0;
 	private long totalDurationBike = 0;
 	private long totalDurationVehicle = 0;
-	private long enter_timestamp;
 	private boolean detailsDrawn[] = {false};
 	
 	@SuppressWarnings("unchecked")
@@ -462,7 +461,15 @@ public class TodaysItineraryDetailedView extends FragmentActivity implements OnM
 	public void onResume() {
 		super.onResume();
 		Constants.appVisible = 1;
-		enter_timestamp = System.currentTimeMillis();
+		
+		LogDbHelper logDbHelper = new LogDbHelper(this);
+		logDbHelper.log(Constants.logComponents.DAILY_ITIN, System.currentTimeMillis());
+		
+		// If the application was paused...
+		if (Constants.paused) {
+			// ...add the pause time-stamp to the log
+			logDbHelper.log(Constants.logComponents.PAUSE, Constants.timestamp);
+		}
 	}
 	
 	@Override
@@ -470,9 +477,8 @@ public class TodaysItineraryDetailedView extends FragmentActivity implements OnM
 		super.onPause();
 		Constants.appVisible = 0;
 		
-		// Add the time spent in the activity to the log
-		LogDbHelper logDbHelper = new LogDbHelper(this);
-		logDbHelper.log(Constants.logComponents.DAILY_ITIN, System.currentTimeMillis()-enter_timestamp);
+		Constants.timestamp = System.currentTimeMillis();
+		Constants.paused = true;
 	}
 	 
 	@Override

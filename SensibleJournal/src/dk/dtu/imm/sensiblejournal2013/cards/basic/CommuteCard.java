@@ -21,16 +21,16 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import dk.dtu.imm.sensiblejournal2013.R;
 import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
 import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomThumbCard;
+import dk.dtu.imm.sensiblejournal2013.data.TripDetails;
 import dk.dtu.imm.sensiblejournal2013.detailedViews.CommuteDetailedView;
 import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 import dk.dtu.imm.sensiblejournal2013.utilities.AppFunctions;
-import dk.dtu.imm.sensiblejournal2013.utilities.TripDetails;
 
 /** COMMUTE (LATEST JOURNEY) CARD **/
 public class CommuteCard extends Card {
@@ -53,8 +53,7 @@ public class CommuteCard extends Card {
     private LinkedList<Date> arrivals = new LinkedList<Date>();
     private LinkedList<Date> departures = new LinkedList<Date>();
     private CustomThumbCard thumbnail;
-    private LinearLayout awesomeLayout;
-    private TextView awesomeTextView;
+    private Button awesomeButton;
     private boolean[] awesomeClicked = {false};
 
 
@@ -94,6 +93,7 @@ public class CommuteCard extends Card {
             	intent.putExtra(Constants.DISTANCE, tripDetails.getTotalDistance());                    
             	intent.putExtra(Constants.SPEED, tripDetails.getSpeed(0));
             	intent.putExtra(Constants.VEHICLE, tripDetails.getVehicle(0));
+            	Constants.paused = false;
             	context.startActivity(intent);
             }
         });            
@@ -160,9 +160,8 @@ public class CommuteCard extends Card {
     	CardThumbnailView cardThumb = (CardThumbnailView) parent.findViewById(R.id.card_thumbnail_layout);
         cardThumb.addCardThumbnail(thumbnail);
         
-        awesomeLayout = (LinearLayout) view.findViewById(R.id.awesome_layout);
-        awesomeTextView = (TextView) view.findViewById(R.id.awesome);
-        functions.setupAwesomeButton(view, awesomeLayout, awesomeTextView, awesomeClicked, getType());    	                        
+        awesomeButton = (Button) view.findViewById(R.id.awesome);
+        functions.setupAwesomeButton(view, awesomeButton, awesomeClicked, getType());    	                        
         
     	if (addresses.size() > 0) {
 	    	route_from = (TextView) parent.findViewById(R.id.route_from);

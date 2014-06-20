@@ -42,24 +42,23 @@
     <string name="title_activity_archive_weeks">ArchiveWeeksActivity</string>
     <string name="sensible_dtu">Sensible DTU Logo</string>
     <string name="login_wait_message">Please wait while login starts&#8230;</string>
-    <string name="awesome">Click if useful!</string>
+    <string name="awesome">Awesome!</string>
+    <string name="got_it">Got it!</string>
     <string name="stationary_title">Time spent stationary</string>
     <string name="walking_title">Time spent walking</string>
     <string name="biking_title">Time spent biking</string>
     <string name="vehicle_title">Time spent on a vehicle</string>
     <string name="show_more">Show more button</string>    
     <string name="archived">Archived</string>
-    <string name="tutorial1_title">Welcome to Sensible Journal 2014</string>
-    <string name="tutorial2_title">Your routes are archived!</string>
-    <string name="tutorial3_title">Scroll to access your history!</string>
-    <string name="tutorial4_title">Explore the detailed views!</string>
-    <string name="tutorial5_title">Have fun!</string>
-    <string name="tutorial1_text">Observe your daily movements! The top 6 cards provide the latest information about your movements!</string>
-    <string name="tutorial2_text">By swiping to the right you have access to all your archived daily and weekly routes!</string>
-    <string name="tutorial3_text">Scrolling down also provides access to older daily archived routes!</string>
-    <string name="tutorial4_text">Each card provides a detailed view of your movements and stats. Press the buttons shown above to access further info or visualize your movements!</string>
-    <string name="tutorial5_text">Swipe away the grey tutorial cards when you are done with them. Enjoy exploring!</string>
-                
+    <string name="tutorial1_title">Welcome to Sensible Journal 2014</string>    
+    <string name="tutorial2_title">Explore the detailed views!</string>
+    <string name="tutorial3_title">View your history!</string>
+    <string name="tutorial4_title">Your routes are archived!</string>
+    <string name="tutorial1_text">The top 6 cards provide info about your latest movements!</string>
+	<string name="tutorial2_text">Tap on each card to access a more detailed view of your movements!</string>    
+    <string name="tutorial3_text">Scroll down to access your history!</string>    
+    <string name="tutorial4_text">Right-swipe to access your archive!</string>
+       
     <string name="app_description">SensibleJournal 2014 provides a card-based interface for visualizing your SensibleDTU data\n\n
         							More visualizations coming soon!</string>
          
@@ -73,8 +72,11 @@
 		&#8226; https://developers.google.com/maps/documentation/android\n
 		&#8226; http://www.movable-type.co.uk/scripts/latlong.html\n
 		&#8226; http://mobile.dzone.com/news/android-tutorial-dynamicaly\n
-		
-		\nIcons adapted from \nhttp://www.flaticon.com/
+		&#8226; http://www.google.com/fonts/specimen/Droid+Serif\n
+				
+		\nIcons adapted from 
+		\nhttp://www.flaticon.com/ 
+		\nhttps://developer.android.com/design/downloads/index.html
 	</string>
 	
     <string name="app_id">1410151465935754</string>

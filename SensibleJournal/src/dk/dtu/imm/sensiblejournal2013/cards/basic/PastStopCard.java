@@ -20,7 +20,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 import dk.dtu.imm.sensiblejournal2013.R;
 import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
@@ -47,8 +47,7 @@ public class PastStopCard extends Card {
     private long minutes; 				
     private long seconds;
     private CustomThumbCard thumbnail;
-    private LinearLayout awesomeLayout;
-    private TextView awesomeTextView;
+    private Button awesomeButton;
     private boolean[] awesomeClicked = {false};
 
     public PastStopCard(Context context, LinkedList<Location> locations,
@@ -76,6 +75,7 @@ public class PastStopCard extends Card {
 	            	Intent intent = new Intent(context, PastStopDetailedView.class);
 	                intent.putExtra(Constants.PAST_LOCATION, locations.get(0));
 	                intent.putExtra(Constants.PAST_LOCATION_TIME_SPENT, timeSpentStr);
+	                Constants.paused = false;
 	                context.startActivity(intent);
 	            }
 	        });            
@@ -133,9 +133,8 @@ public class PastStopCard extends Card {
     	CardThumbnailView cardThumb = (CardThumbnailView) parent.findViewById(R.id.card_thumbnail_layout);
         cardThumb.addCardThumbnail(thumbnail);
         
-        awesomeLayout = (LinearLayout) view.findViewById(R.id.awesome_layout);
-        awesomeTextView = (TextView) view.findViewById(R.id.awesome);
-        functions.setupAwesomeButton(view, awesomeLayout, awesomeTextView, awesomeClicked, getType());
+        awesomeButton = (Button) view.findViewById(R.id.awesome);
+        functions.setupAwesomeButton(view, awesomeButton, awesomeClicked, getType());
          
     	if (addresses!=null) {
 	    	address = (TextView) parent.findViewById(R.id.address);

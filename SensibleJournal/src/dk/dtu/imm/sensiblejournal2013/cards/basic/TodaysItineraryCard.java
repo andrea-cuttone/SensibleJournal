@@ -24,7 +24,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
 /** TODAY'S ITINERARY CARD **/
@@ -49,8 +49,7 @@ public class TodaysItineraryCard extends Card{
     private LinkedList<Date> departures = new LinkedList<Date>();
     private boolean archived;
     private CustomThumbCard thumbnail;
-    private LinearLayout awesomeLayout;
-    private TextView awesomeTextView;
+    private Button awesomeButton;
     private boolean[] awesomeClicked = {false};
 
     public TodaysItineraryCard(Context context, String date, LinkedList<Integer> POI_id, LinkedList<Location> itineraryLocations,
@@ -92,6 +91,7 @@ public class TodaysItineraryCard extends Card{
             	intent.putExtra(Constants.STOP_LOCATIONS_DEPARTURES, departures);
             	intent.putExtra(Constants.POIs, POI_id);
             	intent.putExtra(Constants.SELECTED_DAY, date);
+            	Constants.paused = false;
             	context.startActivity(intent);
             }
         });            
@@ -146,9 +146,8 @@ public class TodaysItineraryCard extends Card{
     	CardThumbnailView cardThumb = (CardThumbnailView) parent.findViewById(R.id.card_thumbnail_layout);
         cardThumb.addCardThumbnail(thumbnail);
         
-        awesomeLayout = (LinearLayout) view.findViewById(R.id.awesome_layout);
-        awesomeTextView = (TextView) view.findViewById(R.id.awesome);
-        functions.setupAwesomeButton(view, awesomeLayout, awesomeTextView, awesomeClicked, getType());
+        awesomeButton = (Button) view.findViewById(R.id.awesome);
+        functions.setupAwesomeButton(view, awesomeButton, awesomeClicked, getType());
     	
     	//Retrieve elements
     	total_distance_text = (TextView) parent.findViewById(R.id.total_distance_title);

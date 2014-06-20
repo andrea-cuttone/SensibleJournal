@@ -20,6 +20,10 @@ import dk.dtu.imm.sensiblejournal2013.cards.basic.MyCurrentLocationCard;
 import dk.dtu.imm.sensiblejournal2013.cards.basic.PastStopCard;
 import dk.dtu.imm.sensiblejournal2013.cards.basic.TodaysItineraryCard;
 import dk.dtu.imm.sensiblejournal2013.cards.basic.WeeklyItineraryCard;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard1;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard2;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard3;
+import dk.dtu.imm.sensiblejournal2013.cards.tutorial.TutorialCard4;
 import dk.dtu.imm.sensiblejournal2013.data.CacheDatabaseContract.CacheEntry;
 import dk.dtu.imm.sensiblejournal2013.usageLog.LogDatabaseContract.LogEntry;
 
@@ -30,7 +34,7 @@ public class Constants {
 	public static String DATA_DB_FILENAME = "sensible_journal_cache.db";
 	public static final int DATA_DB_VERSION = 44;
 	public static String LOG_DB_FILENAME = "sensible_journal_log.db";
-	public static final int LOG_DB_VERSION = 3;
+	public static final int LOG_DB_VERSION = 6;
 	private static final String TEXT_TYPE = " TEXT";
 	private static final String LONG_TYPE = " LONG";
 	private static final String INTEGER_TYPE = " INTEGER";
@@ -81,6 +85,10 @@ public class Constants {
 	public static MyCurrentLocationCard myCurrentLocationCard;
 	public static PastStopCard pastStopCard;
 	public static CommuteCard commuteCard;
+	public static TutorialCard1 tutorialCard1;
+	public static TutorialCard2 tutorialCard2;
+	public static TutorialCard3 tutorialCard3;
+	public static TutorialCard4 tutorialCard4;
 	
 	public static LinkedList<Integer> weeklyPOI_ids = new LinkedList<Integer>();
 	public static LinkedList<Location> weeklyLocations = new LinkedList<Location>();
@@ -105,7 +113,7 @@ public class Constants {
     public final static String MOST_VISITED_POIs_LOCATIONS = "dk.dtu.imm.sensiblejournal2013.MOST_VISITED_POIs_LOCATIONS";
     public final static String DISTANCE = "dk.dtu.imm.sensiblejournal2013.DISTANCE";
     public final static String SPEED = "dk.dtu.imm.sensiblejournal2013.SPEED";
-    public final static String VEHICLE = "dk.dtu.imm.sensiblejournal2013.VEHICLE";
+    public final static String VEHICLE = "dk.dtu.imm.sensiblejournal2013.VEHICLE";	
     
     public static int NO_OF_MAX_MOST_VISITED = 10;
     public static int NO_OF_CURR_MOST_VISITED = 3;
@@ -138,5 +146,7 @@ public class Constants {
     public static LinkedList<Date> departures;
     public static LinkedList<String> days;
 	public static HttpClient httpClient;
+	public static boolean paused = true;
+	public static long timestamp = 0;
 	
 }

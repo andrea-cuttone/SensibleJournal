@@ -20,7 +20,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 import dk.dtu.imm.sensiblejournal2013.R;
 import dk.dtu.imm.sensiblejournal2013.cards.tools.CustomHeader;
@@ -57,8 +57,7 @@ public class MostVisitedPlacesCard extends Card{
 	private Map<Integer, Location> POI_locations = new HashMap<Integer, Location>();
     private Geocoder geocoder;
     private CustomThumbCard thumbnail;
-    private LinearLayout awesomeLayout;
-    private TextView awesomeTextView;
+    private Button awesomeButton;
     private boolean[] awesomeClicked = {false};
 
     public MostVisitedPlacesCard(Context context, LinkedList<Integer> POI_id,
@@ -159,6 +158,7 @@ public class MostVisitedPlacesCard extends Card{
 	                intent.putExtra(Constants.MOST_VISITED_POIs, final_addresses);
 	                intent.putExtra(Constants.MOST_VISITED_POIs_DURATIONS, final_durations);
 	                intent.putExtra(Constants.MOST_VISITED_POIs_LOCATIONS, final_locations);
+	                Constants.paused = false;
 	                context.startActivity(intent);			
 				}                
 	        });
@@ -196,9 +196,8 @@ public class MostVisitedPlacesCard extends Card{
         CardThumbnailView cardThumb = (CardThumbnailView) parent.findViewById(R.id.card_thumbnail_layout);
         cardThumb.addCardThumbnail(thumbnail);
         
-        awesomeLayout = (LinearLayout) view.findViewById(R.id.awesome_layout);
-        awesomeTextView = (TextView) view.findViewById(R.id.awesome);
-        functions.setupAwesomeButton(view, awesomeLayout, awesomeTextView, awesomeClicked, getType());
+        awesomeButton = (Button) view.findViewById(R.id.awesome);
+        functions.setupAwesomeButton(view, awesomeButton, awesomeClicked, getType());
 
     	if (final_addresses.length > 0) {
 	        //Retrieve elements

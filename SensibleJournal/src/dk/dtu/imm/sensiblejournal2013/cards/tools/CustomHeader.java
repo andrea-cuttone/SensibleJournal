@@ -143,16 +143,7 @@ public class CustomHeader extends CardHeader {
                     t1.setText(getContext().getString(R.string.tutorial4_title));
                     t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
             	}
-            }
-            
-            else if (type == 10) {
-            	TextView t2 = (TextView) view.findViewById(R.id.header_date);
-            	t2.setVisibility(View.GONE);
-            	if (t1!=null) {
-                    t1.setText(getContext().getString(R.string.tutorial5_title));
-                    t1.setTextColor(getContext().getResources().getColor(R.color.grey_font));
-            	}
-            }                       
+            }                                       
         }        
     }
 }
