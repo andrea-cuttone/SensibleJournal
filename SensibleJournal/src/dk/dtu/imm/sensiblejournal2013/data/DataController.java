@@ -85,7 +85,7 @@ public class DataController {
 			}							
 		}
 		
-        String resultJson = "{\"results\": " + json + "}";		
+        String resultJson = "{\"results\": " + json + "}";      
         JSONObject jObject = new JSONObject(resultJson);
 		JSONArray finalResult = jObject.getJSONArray("results");		
 		context.deleteDatabase(Constants.DATA_DB_FILENAME);
