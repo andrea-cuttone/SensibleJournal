@@ -75,6 +75,8 @@ public class PastStopCard extends Card {
 	            	Intent intent = new Intent(context, PastStopDetailedView.class);
 	                intent.putExtra(Constants.PAST_LOCATION, locations.get(0));
 	                intent.putExtra(Constants.PAST_LOCATION_TIME_SPENT, timeSpentStr);
+	                intent.putExtra(Constants.STOP_LOCATIONS_ARRIVALS, arrivals);
+	                intent.putExtra(Constants.STOP_LOCATIONS_DEPARTURES, departures);
 	                Constants.paused = false;
 	                context.startActivity(intent);
 	            }

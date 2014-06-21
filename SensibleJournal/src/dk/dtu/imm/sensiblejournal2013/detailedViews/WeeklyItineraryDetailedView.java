@@ -66,7 +66,6 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 	private List<Marker> markers;
 	private ListView itineraryList;
 	private int noOfUniquePlaces;
-	private int noOfStops;
 	private int curr = 0; // used for the animation
 	private int rotate_move = 0;
 	private LatLng tmpStart = null;
@@ -115,10 +114,7 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 	    final ArrayList<Integer> listIcons =  new ArrayList<Integer>();
     	markers = new LinkedList<Marker>();    	
     	
-    	// Determine the number of stops and...
-        if (itineraryPOI_ids.size()>= 2) noOfStops = itineraryPOI_ids.size()-2;
-        else noOfStops = itineraryPOI_ids.size();
-	    // ...the number of unique visited places
+	    // Determine the number of unique visited places
 	    Set<Integer> tmpSet = new HashSet<Integer>((List<Integer>) itineraryPOI_ids);
 	    noOfUniquePlaces = tmpSet.size();
     	
@@ -224,7 +220,7 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 					// Total stationary time for the day is 24 hours - total travelling time
 					// 86400 in epoch time equals 24 hours, 7*86400 equals 1 week
 					totalDurationStationary = 7*86400 - totalDurationVehicle - totalDurationBike - totalDurationWalking;
-					functions.fillItineraryDetails(noOfUniquePlaces, noOfStops, total_distance_travelled, 
+					functions.fillItineraryDetails(noOfUniquePlaces, 0, total_distance_travelled, 
 							totalDurationStationary, totalDurationWalking, totalDurationBike,
 							totalDurationVehicle, WeeklyItineraryDetailedView.this);
 				    				

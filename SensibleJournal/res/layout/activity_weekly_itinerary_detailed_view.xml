@@ -47,14 +47,7 @@
 		      		    android:layout_width="match_parent"
 		      		    android:layout_height="wrap_content"
 		      		    android:textSize="14sp"
-		        		android:textColor="@color/color_main_text" />
-		      		
-		      		<TextView
-		      		    android:id="@+id/no_of_stops_title"
-		      		    android:layout_width="match_parent"
-		      		    android:layout_height="wrap_content"
-		      		    android:textSize="14sp"
-		        		android:textColor="@color/color_main_text" />
+		        		android:textColor="@color/color_main_text" />		      	
 		      		
 		      		<TextView
 		      		    android:id="@+id/stationary_title"
@@ -107,14 +100,6 @@
 		      		    android:textColor="@color/color_secondary_text"
 		      		    android:textSize="14sp"
 		      		    android:gravity="right" />
-		      		
-		      		<TextView
-		      		    android:id="@+id/no_of_stops"
-		      		    android:layout_width="match_parent"
-		      		    android:layout_height="wrap_content"
-		      		    android:textSize="14sp"
-		        		android:textColor="@color/color_secondary_text"
-		        		android:gravity="right" />
 		      		
 		      		<TextView
 		      		    android:id="@+id/time_stationary"
