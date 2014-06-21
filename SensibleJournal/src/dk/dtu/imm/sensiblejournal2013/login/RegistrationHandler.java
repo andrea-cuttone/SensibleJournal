@@ -54,7 +54,7 @@ public class RegistrationHandler extends Service {
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private static final String PROPERTY_ON_SERVER_EXPIRATION_TIME = "onServerExpirationTimeMs";
 
-    private static final String SHOW_REGISTRATION_REMINDER = "dk.dtu.imm.datacollector2013.show_registration_reminder";
+    private static final String SHOW_REGISTRATION_REMINDER = "dk.dtu.imm.sensiblejournal2013.show_registration_reminder";
 
     public static final String PROPERTY_SENSIBLE_TOKEN = "sensible_token";
     public static final String PROPERTY_SENSIBLE_REFRESH_TOKEN = "sensible_refresh_token";
