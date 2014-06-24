@@ -145,8 +145,14 @@ public class AppFunctions {
 		double distance = earthRadius * angularDist;
 		/******************************************************************************/
 
-		decFormat = new DecimalFormat("#.#");
-		distance = Double.valueOf(decFormat.format(distance));
+		try {
+			decFormat = new DecimalFormat("#.#");
+			distance = Double.valueOf(decFormat.format(distance));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			distance = 0.0;
+		}
 		return (float) distance;
 	}
 
