@@ -126,8 +126,7 @@ public class AppFunctions {
 	}
 
 	// Method that calculates the haversine distance between two locations
-	public float calculateHaversineDistance(Location location1,
-			Location location2) {
+	public float calculateHaversineDistance(Location location1, Location location2) {
 
 		// *** Compute the distance between two points using the haversine formula ***//
 		/********* Source http://www.movable-type.co.uk/scripts/latlong.html *********/
@@ -142,13 +141,18 @@ public class AppFunctions {
 							* Math.sin(longtitudeDiffRad / 2) 
 							* Math.cos(latitudeRadOrigin)
 							* Math.cos(latitudeRadDestin);
-		double angularDist = 2 * Math.atan2(Math.sqrt(haversine),
-				Math.sqrt(1 - haversine));
+		double angularDist = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
 		double distance = earthRadius * angularDist;
 		/******************************************************************************/
 
-		decFormat = new DecimalFormat("#.#");
-		distance = Float.valueOf(decFormat.format(distance));
+		try {
+			decFormat = new DecimalFormat("#.#");
+			distance = Double.valueOf(decFormat.format(distance));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			distance = 0.0;
+		}
 		return (float) distance;
 	}
 
@@ -733,9 +737,8 @@ public class AppFunctions {
 			// If the points are too close to each other, zoom to 15
 			float maxDistance = 0;
 			for (int i = 0; i < locations.size() - 1; i++) {
-				float distance = calculateHaversineDistance(
-						(Location) locations.get(i),
-						(Location) locations.get(i + 1));
+				float distance = calculateHaversineDistance((Location) locations.get(i),
+															(Location) locations.get(i + 1));
 				if (distance > maxDistance)
 					maxDistance = distance;
 			}

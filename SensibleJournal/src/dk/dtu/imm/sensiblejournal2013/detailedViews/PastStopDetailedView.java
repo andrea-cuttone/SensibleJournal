@@ -1,5 +1,6 @@
 package dk.dtu.imm.sensiblejournal2013.detailedViews;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,8 +41,11 @@ public class PastStopDetailedView extends Activity {
 	private AppFunctions functions;
 	private Geocoder geocoder;
 	private List<Address> addresses;
+	private List<?> arrivals;
+	private List<?> departures; 
 	
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_stop_detailed_view);
@@ -70,6 +74,8 @@ public class PastStopDetailedView extends Activity {
 	    Intent intent = getIntent();
 	    final Location pastLocation = (Location) intent.getExtras().get(Constants.PAST_LOCATION);
 	    final String timeSpent = (String) intent.getExtras().get(Constants.PAST_LOCATION_TIME_SPENT);
+	    arrivals = (List<Date>) intent.getExtras().get(Constants.STOP_LOCATIONS_ARRIVALS);
+	    departures = (List<Date>) intent.getExtras().get(Constants.STOP_LOCATIONS_DEPARTURES);
 	    geocoder = new Geocoder(this, Locale.getDefault());
 	    final IconGenerator iconFactory = new IconGenerator(this);
     	
@@ -83,7 +89,10 @@ public class PastStopDetailedView extends Activity {
 				    	.title(getResources().getString(R.string.address_title) + ": " + addresses.get(0).getAddressLine(0))
 				        .position(new LatLng(pastLocation.getLatitude(), pastLocation.getLongitude()))
 				        .anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV())
-				        .snippet(getResources().getString(R.string.time_spent_title_title) + ": " + timeSpent)).showInfoWindow();
+				        .snippet(getResources().getString(R.string.time_spent_title_title) + ": " + timeSpent +
+				        									"\nFrom: " + ((Date) arrivals.get(0)).toString().substring(0, 20) +
+				        					    		    "\nTo: " +  ((Date) departures.get(0)).toString().substring(0, 20)))
+				        					    		    .showInfoWindow();
 		 			     
 		 			    
 		 				// Updates the location and zoom of the MapView

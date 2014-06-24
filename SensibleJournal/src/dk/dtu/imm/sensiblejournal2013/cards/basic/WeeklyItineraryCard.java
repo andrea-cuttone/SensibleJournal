@@ -37,10 +37,7 @@ public class WeeklyItineraryCard extends Card {
 	private TextView total_distance;
 	private TextView no_of_unique_places_text;
 	private TextView no_of_unique_places;
-	private TextView no_of_stops_text;
-	private TextView no_of_stops;
 	private int noOfUniquePlaces;
-	private int noOfStops;
 	private float total_distance_travelled;
 	private DisplayMetrics metrics;
 	private Context context;
@@ -144,11 +141,8 @@ public class WeeklyItineraryCard extends Card {
 	    
 	    
 		    thumbnail.setUrlResource(thumb_resource);
-		            
-		    // Determine the number of stops and...
-	        if (POI_id.size()>= 2) noOfStops = POI_id.size()-2;
-	        else noOfStops = POI_id.size();
-		    // ...the number of unique visited places
+		            		    
+		    // Determine the number of unique visited places
 		    Set<Integer> tmpSet = new HashSet<Integer>(POI_id);
 		    noOfUniquePlaces = tmpSet.size();
 		    // Travel's distance calculation
@@ -186,15 +180,7 @@ public class WeeklyItineraryCard extends Card {
 	    
 	    no_of_unique_places = (TextView) parent.findViewById(R.id.no_of_unique_places);
 	    if (no_of_unique_places != null)
-	    	no_of_unique_places.setText(Integer.toString(noOfUniquePlaces)); 
-	    
-	    no_of_stops_text = (TextView) parent.findViewById(R.id.no_of_stops_title);
-	    if (no_of_stops_text != null)
-	    	no_of_stops_text.setText(R.string.no_of_stops_text);
-	    
-	    no_of_stops = (TextView) parent.findViewById(R.id.no_of_stops);
-	    if (no_of_stops != null)
-	    	no_of_stops.setText(Integer.toString(noOfStops));
+	    	no_of_unique_places.setText(Integer.toString(noOfUniquePlaces));
 	    
 	}
 
