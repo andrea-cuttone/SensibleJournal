@@ -150,15 +150,8 @@ public class AppFunctions {
 			distance = Double.valueOf(decFormat.format(distance));
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-			try {
-				decFormat = new DecimalFormat("#,#");
-				distance = Double.valueOf(decFormat.format(distance));
-			}
-			catch (Exception e1) {
-				e1.printStackTrace();
-				distance = 0.0;
-			}
+			e.printStackTrace();		
+			distance = 0.0;
 		}
 		return (float) distance;
 	}
