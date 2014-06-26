@@ -5,6 +5,7 @@ import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -113,6 +114,10 @@ public class WeeklyItineraryCard extends Card {
 	    /** MAP THUMBNAIL CREATION **/
 	    /****************************/ 
 	    DecimalFormat decFormat = new DecimalFormat("#.000");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		decFormat.setDecimalFormatSymbols(dfs);   	   
+	    
 	    thumbnail = new CustomThumbCard (context);                   	 	       	 	                   	    
 	    String thumb_resource = "http://maps.googleapis.com/maps/api/staticmap?&size=" 
 	    							+ (int) (Constants.THUMB_WIDTH/2 - (10*metrics.density))
@@ -169,8 +174,14 @@ public class WeeklyItineraryCard extends Card {
 	                
 	    total_distance = (TextView) parent.findViewById(R.id.distance);
 	    if (total_distance != null) {
-	        DecimalFormat twoDForm = new DecimalFormat("#.#");
-	        total_distance_travelled = Float.valueOf(twoDForm.format(total_distance_travelled));
+	    	float tmpDistance;
+		    DecimalFormat twoDForm = new DecimalFormat("#.#");
+			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+			dfs.setDecimalSeparator('.');
+			twoDForm.setDecimalFormatSymbols(dfs);
+			tmpDistance = Float.valueOf(twoDForm.format(total_distance_travelled));
+		    
+		    total_distance_travelled = Float.valueOf(tmpDistance);
 	    	total_distance.setText(Float.toString(total_distance_travelled) + " Km");
 	    }
 	    
