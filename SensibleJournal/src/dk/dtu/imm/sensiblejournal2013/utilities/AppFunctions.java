@@ -113,10 +113,13 @@ public class AppFunctions {
 		for (int i = 0; i < itineraryLocations.size() - 1; i++) {
 			float distance = calculateHaversineDistance((Location) itineraryLocations.get(i),
 													(Location) itineraryLocations.get(i + 1));
+			distance = Float.valueOf(decFormat.format(distance));
+			
 			tripDetails.addDistance((float) distance);
 			Long duration = (((Date) arrivals.get(i + 1)).getTime() / 1000)
 							- (((Date) departures.get(i)).getTime() / 1000);
 			tripDetails.addDuration(duration);
+			
 			float routeSpeed = Float.parseFloat(calculateSpeed((float) distance, duration));
 			tripDetails.addSpeed(Float.toString(routeSpeed));
 			tripDetails.addVehicle(determineMeansOfTransport(routeSpeed));
@@ -146,17 +149,12 @@ public class AppFunctions {
 		double distance = earthRadius * angularDist;
 		/******************************************************************************/
 
-		try {
-			decFormat = new DecimalFormat("#.#");
-			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-			dfs.setDecimalSeparator('.');
-			decFormat.setDecimalFormatSymbols(dfs);
-			distance = Double.valueOf(decFormat.format(distance));
-		}
-		catch (Exception e) {
-			e.printStackTrace();		
-			distance = 0.0;
-		}
+		decFormat = new DecimalFormat("#.#");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		decFormat.setDecimalFormatSymbols(dfs);
+		distance = Double.valueOf(decFormat.format(distance));
+		
 		return (float) distance;
 	}
 
@@ -168,7 +166,13 @@ public class AppFunctions {
 		// Calculate the speed, first in km/h
 		total_metres = total_distance * 1000;
 		route_speed = (total_metres / duration) * 3.6;
+				
 		decFormat = new DecimalFormat("#.00");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		decFormat.setDecimalFormatSymbols(dfs);
+		route_speed = Double.valueOf(decFormat.format(route_speed));
+	
 		return decFormat.format(route_speed);
 	}
 
@@ -233,7 +237,11 @@ public class AppFunctions {
 
 		total_distance = (TextView) activity.findViewById(R.id.distance);
 		if (total_distance != null) {
-			decFormat = new DecimalFormat("#.#");
+			DecimalFormat decFormat = new DecimalFormat("#.#");
+			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+			dfs.setDecimalSeparator('.');
+			decFormat.setDecimalFormatSymbols(dfs);
+		   
 			total_distance_travelled = Float.valueOf(decFormat.format(total_distance_travelled));
 			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
 		}
@@ -306,11 +314,13 @@ public class AppFunctions {
 
 		total_distance = (TextView) activity.findViewById(R.id.distance);
 		if (total_distance != null) {
-			decFormat = new DecimalFormat("#.#");
-			total_distance_travelled = Float.valueOf(decFormat
-					.format(total_distance_travelled));
-			total_distance.setText(Float.toString(total_distance_travelled)
-					+ " Km");
+			DecimalFormat decFormat = new DecimalFormat("#.#");
+			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+			dfs.setDecimalSeparator('.');
+			decFormat.setDecimalFormatSymbols(dfs);	    				
+			
+			total_distance_travelled = Float.valueOf(decFormat.format(total_distance_travelled));
+			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
 		}
 
 		no_of_unique_places = (TextView) activity
