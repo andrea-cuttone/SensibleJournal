@@ -3,6 +3,7 @@ package dk.dtu.imm.sensiblejournal2013.utilities;
 import it.gmariotti.cardslib.library.internal.Card;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -147,6 +148,9 @@ public class AppFunctions {
 
 		try {
 			decFormat = new DecimalFormat("#.#");
+			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+			dfs.setDecimalSeparator('.');
+			decFormat.setDecimalFormatSymbols(dfs);
 			distance = Double.valueOf(decFormat.format(distance));
 		}
 		catch (Exception e) {
