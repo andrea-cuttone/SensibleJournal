@@ -7,14 +7,14 @@ public class TripDetails {
 
 	private List<Float> distances;
 	private List<Long> durations;
-	private List<String> speeds;
+	private List<Float> speeds;
 	private List<String> vehicles;
 	private float totalDistance;
 	
 	public TripDetails() {
 		distances = new LinkedList<Float>();
 		durations = new LinkedList<Long>();
-		speeds = new LinkedList<String>();
+		speeds = new LinkedList<Float>();
 		vehicles = new LinkedList<String>();
 	}
 	
@@ -30,7 +30,7 @@ public class TripDetails {
 		vehicles.add(vehicle);
 	}
 	
-	public void addSpeed(String speed) {
+	public void addSpeed(float speed) {
 		speeds.add(speed);
 	}
 	
@@ -50,7 +50,7 @@ public class TripDetails {
 		return vehicles.get(i);
 	}
 	
-	public String getSpeed(int i) {
+	public Float getSpeed(int i) {
 		return speeds.get(i);
 	}
 	

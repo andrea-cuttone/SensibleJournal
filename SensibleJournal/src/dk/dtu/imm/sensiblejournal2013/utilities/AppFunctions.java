@@ -2,8 +2,6 @@ package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -81,7 +79,6 @@ public class AppFunctions {
 	private LinkedList<Date> arrivals;
 	private LinkedList<Date> departures;
 	private LinkedList<String> days;
-	private DecimalFormat decFormat;
 	private View footerView;
 	private String address = "";
 	private int earthRadius = 6371;
@@ -113,15 +110,14 @@ public class AppFunctions {
 		for (int i = 0; i < itineraryLocations.size() - 1; i++) {
 			float distance = calculateHaversineDistance((Location) itineraryLocations.get(i),
 													(Location) itineraryLocations.get(i + 1));
-			distance = Float.valueOf(decFormat.format(distance));
 			
-			tripDetails.addDistance((float) distance);
+			tripDetails.addDistance(distance);
 			Long duration = (((Date) arrivals.get(i + 1)).getTime() / 1000)
 							- (((Date) departures.get(i)).getTime() / 1000);
 			tripDetails.addDuration(duration);
 			
-			float routeSpeed = Float.parseFloat(calculateSpeed((float) distance, duration));
-			tripDetails.addSpeed(Float.toString(routeSpeed));
+			float routeSpeed = calculateSpeed(distance, duration);
+			tripDetails.addSpeed(routeSpeed);
 			tripDetails.addVehicle(determineMeansOfTransport(routeSpeed));
 			total_distance_travelled += distance;
 		}
@@ -148,32 +144,19 @@ public class AppFunctions {
 		double angularDist = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
 		double distance = earthRadius * angularDist;
 		/******************************************************************************/
-
-		decFormat = new DecimalFormat("#.#");
-		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-		dfs.setDecimalSeparator('.');
-		decFormat.setDecimalFormatSymbols(dfs);
-		distance = Double.valueOf(decFormat.format(distance));
 		
 		return (float) distance;
 	}
 
 	// Method to calculate the travel speed for a specified distance
-	public String calculateSpeed(float total_distance, Long duration) {
+	public Float calculateSpeed(float total_distance, Long duration) {
 		float total_metres;
-		Double route_speed;
+		Float route_speed;
 
 		// Calculate the speed, first in km/h
 		total_metres = total_distance * 1000;
-		route_speed = (total_metres / duration) * 3.6;
-				
-		decFormat = new DecimalFormat("#.00");
-		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-		dfs.setDecimalSeparator('.');
-		decFormat.setDecimalFormatSymbols(dfs);
-		route_speed = Double.valueOf(decFormat.format(route_speed));
-	
-		return decFormat.format(route_speed);
+		route_speed = (total_metres / duration) * 3.6f;
+		return route_speed;
 	}
 
 	// Method to determine the means of transport of a journey.
@@ -213,7 +196,7 @@ public class AppFunctions {
 
 	// Method that fills the commute details on the latest journey card
 	public void fillCommuteDetails(float total_distance_travelled,
-			String routeSpeed, String vehicle, Activity activity) {
+			Float routeSpeed, String vehicle, Activity activity) {
 
 		TextView speed_text;
 		TextView speed;
@@ -228,7 +211,7 @@ public class AppFunctions {
 
 		speed = (TextView) activity.findViewById(R.id.speed);
 		if (speed != null)
-			speed.setText(routeSpeed + " km/h");
+			speed.setText("" + routeSpeed + " km/h");
 
 		total_distance_text = (TextView) activity
 				.findViewById(R.id.distance_title);
@@ -237,12 +220,6 @@ public class AppFunctions {
 
 		total_distance = (TextView) activity.findViewById(R.id.distance);
 		if (total_distance != null) {
-			DecimalFormat decFormat = new DecimalFormat("#.#");
-			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-			dfs.setDecimalSeparator('.');
-			decFormat.setDecimalFormatSymbols(dfs);
-		   
-			total_distance_travelled = Float.valueOf(decFormat.format(total_distance_travelled));
 			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
 		}
 
@@ -313,13 +290,7 @@ public class AppFunctions {
 			vehicle_text.setText(R.string.vehicle_title);
 
 		total_distance = (TextView) activity.findViewById(R.id.distance);
-		if (total_distance != null) {
-			DecimalFormat decFormat = new DecimalFormat("#.#");
-			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-			dfs.setDecimalSeparator('.');
-			decFormat.setDecimalFormatSymbols(dfs);	    				
-			
-			total_distance_travelled = Float.valueOf(decFormat.format(total_distance_travelled));
+		if (total_distance != null) {	
 			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
 		}
 

@@ -53,7 +53,7 @@ public class CommuteDetailedView extends FragmentActivity implements OnMarkerCli
 
 	private GoogleMap map;
 	private float total_distance_travelled;
-    private String routeSpeed;
+    private Float routeSpeed;
     private String vehicle;
     private AppFunctions functions;
 	private List<?> locations;
@@ -96,7 +96,7 @@ public class CommuteDetailedView extends FragmentActivity implements OnMarkerCli
 	    arrivals = (List<?>) intent.getExtras().get(Constants.STOP_LOCATIONS_ARRIVALS);
 	    departures = (List<?>) intent.getExtras().get(Constants.STOP_LOCATIONS_DEPARTURES);
 	    total_distance_travelled = (Float) intent.getExtras().get(Constants.DISTANCE);
-	    routeSpeed = (String) intent.getExtras().get(Constants.SPEED);
+	    routeSpeed = (Float) intent.getExtras().get(Constants.SPEED);
 	    vehicle = (String) intent.getExtras().get(Constants.VEHICLE);
 	    setTitle("Latest Journey");
 		
