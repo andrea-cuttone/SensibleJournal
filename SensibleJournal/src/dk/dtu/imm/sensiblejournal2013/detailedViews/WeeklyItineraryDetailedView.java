@@ -165,8 +165,8 @@ public class WeeklyItineraryDetailedView extends FragmentActivity implements OnM
 							
 						if (i < itineraryLocations.size()-1) {
 							commuteDetails = new TwoStringListObject();
-							commuteDetails.setString1("Travel for: " + tripDetails.getDistance(i) + " km");
-							commuteDetails.setString2("Average speed: " + tripDetails.getSpeed(i) + " km/h");
+							commuteDetails.setString1("Travel for: " + functions.formatDecimal(tripDetails.getDistance(i)) + " km");
+							commuteDetails.setString2("Average speed: " + functions.formatDecimal(tripDetails.getSpeed(i)) + " km/h");
 							itineraryArray.add(commuteDetails);
 							
 							if (tripDetails.getVehicle(i).equals("car")) {

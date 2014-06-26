@@ -4,8 +4,6 @@ import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -112,12 +110,7 @@ public class WeeklyItineraryCard extends Card {
 	    });            
 	              
 	    /** MAP THUMBNAIL CREATION **/
-	    /****************************/ 
-	    DecimalFormat decFormat = new DecimalFormat("#.000");
-		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-		dfs.setDecimalSeparator('.');
-		decFormat.setDecimalFormatSymbols(dfs);   	   
-	    
+	    /****************************/ 	  
 	    thumbnail = new CustomThumbCard (context);                   	 	       	 	                   	    
 	    String thumb_resource = "http://maps.googleapis.com/maps/api/staticmap?&size=" 
 	    							+ (int) (Constants.THUMB_WIDTH/2 - (10*metrics.density))
@@ -126,22 +119,22 @@ public class WeeklyItineraryCard extends Card {
 	    
 	    if (locations.size() > 0) {
 		    thumb_resource += "&markers="
-		    					+ decFormat.format(locations.get(0).getLatitude()) + ","
-		    					+ decFormat.format(locations.get(0).getLongitude());
+		    					+ functions.formatDecimal(locations.get(0).getLatitude()) + ","
+		    					+ functions.formatDecimal(locations.get(0).getLongitude());
 		    
 		    for(int i=1; i<POI_id.size()-1; i++){
 		    	thumb_resource += "&markers=" 
-		    					+ decFormat.format(locations.get(i).getLatitude()) + ","
-		    					+ decFormat.format(locations.get(i).getLongitude());    	
+		    					+ functions.formatDecimal(locations.get(i).getLatitude()) + ","
+		    					+ functions.formatDecimal(locations.get(i).getLongitude());    	
 		    }
 		    thumb_resource += "&markers="
-		    					+ decFormat.format(locations.get(POI_id.size()-1).getLatitude()) + "," 
-		    					+ decFormat.format(locations.get(POI_id.size()-1).getLongitude());
+		    					+ functions.formatDecimal(locations.get(POI_id.size()-1).getLatitude()) + "," 
+		    					+ functions.formatDecimal(locations.get(POI_id.size()-1).getLongitude());
 		    
 		    thumb_resource += "&path=color:0x29A3CC|weight:4";
 		    for(int i=0; i<POI_id.size(); i++){
-		    	thumb_resource += "|" + decFormat.format(locations.get(i).getLatitude()) + ","
-		    								+ decFormat.format(locations.get(i).getLongitude());    	
+		    	thumb_resource += "|" + functions.formatDecimal(locations.get(i).getLatitude()) + ","
+		    								+ functions.formatDecimal(locations.get(i).getLongitude());    	
 		    }
 	    
 	    
@@ -173,17 +166,7 @@ public class WeeklyItineraryCard extends Card {
 	    	total_distance_text.setText(R.string.total_distance_text);
 	                
 	    total_distance = (TextView) parent.findViewById(R.id.distance);
-	    if (total_distance != null) {
-	    	float tmpDistance;
-		    DecimalFormat twoDForm = new DecimalFormat("#.#");
-			DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-			dfs.setDecimalSeparator('.');
-			twoDForm.setDecimalFormatSymbols(dfs);
-			tmpDistance = Float.valueOf(twoDForm.format(total_distance_travelled));
-		    
-		    total_distance_travelled = Float.valueOf(tmpDistance);
-	    	total_distance.setText(Float.toString(total_distance_travelled) + " Km");
-	    }
+	    if (total_distance != null)	total_distance.setText(functions.formatDecimal(total_distance_travelled) + " Km");
 	    
 	    no_of_unique_places_text = (TextView) parent.findViewById(R.id.no_of_unique_places_title);
 	    if (no_of_unique_places_text != null)

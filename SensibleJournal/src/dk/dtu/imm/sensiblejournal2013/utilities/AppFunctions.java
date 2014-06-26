@@ -2,6 +2,8 @@ package dk.dtu.imm.sensiblejournal2013.utilities;
 
 import it.gmariotti.cardslib.library.internal.Card;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -170,6 +172,28 @@ public class AppFunctions {
 		else
 			return "walk";
 	}
+	
+	// Method to return float decimal values in a #.# format for printing
+	public String formatDecimal(Float value){
+		DecimalFormat decFormat = new DecimalFormat("#.#");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');		
+		decFormat.setDecimalFormatSymbols(dfs);
+		value = Float.valueOf(decFormat.format(value));
+		
+		return value.toString();
+	}
+	
+	// Method to return double decimal values (coordinates) in a #.### format for printing
+	public String formatDecimal(Double value){
+		DecimalFormat decFormat = new DecimalFormat("#.###");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');		
+		decFormat.setDecimalFormatSymbols(dfs);
+		value = Double.valueOf(decFormat.format(value));
+			
+		return value.toString();
+	}
 
 	// Method that calculates duration in the format: DD:HH:MM
 	public String getDaysHoursMinutes(long duration) {
@@ -211,7 +235,7 @@ public class AppFunctions {
 
 		speed = (TextView) activity.findViewById(R.id.speed);
 		if (speed != null)
-			speed.setText("" + routeSpeed + " km/h");
+			speed.setText(formatDecimal(routeSpeed) + " km/h");
 
 		total_distance_text = (TextView) activity
 				.findViewById(R.id.distance_title);
@@ -220,7 +244,7 @@ public class AppFunctions {
 
 		total_distance = (TextView) activity.findViewById(R.id.distance);
 		if (total_distance != null) {
-			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
+			total_distance.setText(formatDecimal(total_distance_travelled)	+ " Km");
 		}
 
 		meansOfTransp = (ImageView) activity.findViewById(R.id.vehicle);
@@ -291,7 +315,7 @@ public class AppFunctions {
 
 		total_distance = (TextView) activity.findViewById(R.id.distance);
 		if (total_distance != null) {	
-			total_distance.setText(Float.toString(total_distance_travelled)	+ " Km");
+			total_distance.setText(formatDecimal(total_distance_travelled)	+ " Km");
 		}
 
 		no_of_unique_places = (TextView) activity

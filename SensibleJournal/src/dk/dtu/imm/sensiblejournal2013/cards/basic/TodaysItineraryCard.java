@@ -4,8 +4,6 @@ import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -156,17 +154,7 @@ public class TodaysItineraryCard extends Card{
     		total_distance_text.setText(R.string.total_distance_text);
     	            
     	total_distance = (TextView) parent.findViewById(R.id.distance);
-    	if (total_distance != null) {
-    		float tmpDistance;
-    	    DecimalFormat twoDForm = new DecimalFormat("#.#");
-    		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-    		dfs.setDecimalSeparator('.');
-    		twoDForm.setDecimalFormatSymbols(dfs);
-    		tmpDistance = Float.valueOf(twoDForm.format(total_distance_travelled));
-    	    
-    	    total_distance_travelled = Float.valueOf(tmpDistance);
-    		total_distance.setText(Float.toString(total_distance_travelled) + " Km");
-    	}
+    	if (total_distance != null) total_distance.setText(functions.formatDecimal(total_distance_travelled) + " Km");    	
     		
     	no_of_unique_places_text = (TextView) parent.findViewById(R.id.no_of_unique_places_title);
     	if (no_of_unique_places_text != null)

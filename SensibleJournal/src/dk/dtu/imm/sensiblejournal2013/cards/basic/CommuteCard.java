@@ -4,8 +4,6 @@ import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.component.CardThumbnailView;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -190,15 +188,13 @@ public class CommuteCard extends Card {
 	        if (distance != null)        	
 	        	distance.setText("Distance");
 	        
-			DecimalFormat decFormat = new DecimalFormat("#.#");
-			
 	        the_speed = (TextView) parent.findViewById(R.id.the_speed);
 	        if (the_speed != null)
-	        	the_speed.setText(decFormat.format(tripDetails.getSpeed(0)) + " km/h");        
+	        	the_speed.setText(functions.formatDecimal(tripDetails.getSpeed(0)) + " km/h");        
 	        
 	        the_distance = (TextView) parent.findViewById(R.id.the_distance);
 	        if (the_distance != null) {       	
-	        	the_distance.setText(decFormat.format(tripDetails.getTotalDistance()) + " Km");
+	        	the_distance.setText(functions.formatDecimal(tripDetails.getTotalDistance()) + " Km");
 	        }
 	        
 	        meansOfTransp = (ImageView) parent.findViewById(R.id.vehicle);
