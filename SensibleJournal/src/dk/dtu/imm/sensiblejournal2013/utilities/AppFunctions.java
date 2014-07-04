@@ -88,6 +88,7 @@ public class AppFunctions {
 	private DataController rClient;
 	private PendingIntent notificationPendingIntent;
 	private PendingIntent fetchingPendingIntent;
+	private PendingIntent uploadPendingIntent;
 	private AlarmManager alarmManager;
 
 	public AppFunctions(Context context) {
@@ -1073,16 +1074,15 @@ public class AppFunctions {
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
 																AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
 		
-		// Set repeating alarm for fetching data from server
+		// Set repeating alarm for uploading usage data to server
 		hours = 17 + (int) (Math.random() * ((19 - 17) + 1));
 		minutes = 0 + (int) (Math.random() * ((60 - 0) + 1));
 		calendar.set(Calendar.HOUR_OF_DAY, hours);
 		calendar.set(Calendar.MINUTE, minutes);
 		calendar.set(Calendar.SECOND, 0);
 		Intent usageUpload = new Intent(context, UsageUploadReceiver.class);
-		fetchingPendingIntent = PendingIntent.getBroadcast(context, 0, usageUpload, PendingIntent.FLAG_CANCEL_CURRENT);
-		alarmManager.cancel(fetchingPendingIntent);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY,
-																AlarmManager.INTERVAL_DAY, fetchingPendingIntent);
+		uploadPendingIntent = PendingIntent.getBroadcast(context, 0, usageUpload, PendingIntent.FLAG_CANCEL_CURRENT);
+		alarmManager.cancel(uploadPendingIntent);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, uploadPendingIntent);
 	}	
 }
