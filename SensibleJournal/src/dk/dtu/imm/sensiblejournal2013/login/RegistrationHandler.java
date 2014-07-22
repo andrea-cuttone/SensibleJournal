@@ -69,7 +69,7 @@ public class RegistrationHandler extends Service {
     public static final long REGISTRATION_EXPIRY_TIME_MS = 7 * DAY;
 
     public static final String CLIENT_ID= "9f5fd6e9dda30e4cd7a91eb910560b";
-    private static final String CLIENT_SECRET = "ae24479f1dd544d8adc7af2698c04e";
+    private static final String CLIENT_SECRET = "";
 
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
