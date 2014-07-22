@@ -1,0 +1,6 @@
+[submodule "externals/cardslib"]
+	path = externals/cardslib
+	url = https://github.com/gabrielemariotti/cardslib.git
+[submodule "externals/google-maps-api-V2"]
+	path = externals/google-maps-api-V2
+	url = https://github.com/googlemaps/android-maps-utils.git
