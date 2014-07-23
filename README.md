@@ -1,8 +1,10 @@
-# README #
+# SensibleJournal
 
-*Setup*
+SensibleJournal creates dynamic, interactive visualisations of your data collected in the SensibleDTU project: http://www.sensible.dtu.dk/
 
-- git submodule init && git submodule update
+## Setup
+
+- ```git submodule init && git submodule update```
 - import into Eclipse google-play-services_lib
 - import into Eclipse externals/cardslib/library/source/main as existing Android code
 - in the cardslib (main) project, select java as source folder
