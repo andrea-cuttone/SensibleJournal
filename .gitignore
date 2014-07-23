@@ -7,3 +7,4 @@ google-maps-api-V2/gen/
 cardslib/gen/
 SensibleJournal/gen/
 .DS_Store
+SensibleJournal/src/dk/dtu/imm/sensiblejournal2013/login/ClientSecrets.java

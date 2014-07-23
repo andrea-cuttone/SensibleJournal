@@ -162,7 +162,7 @@ public class AuthActivity extends Activity {
         Log.d(TAG, "Will start the webview registration now");
         TelephonyManager tm = (TelephonyManager)this.getSystemService(TELEPHONY_SERVICE);
         String imei = tm.getDeviceId();
-        String link = BASE_URL + "&client_id=" + RegistrationHandler.CLIENT_ID + "&gcm_id=" + regId + "&device_id=" + imei;
+        String link = BASE_URL + "&client_id=" + ClientSecrets.CLIENT_ID + "&gcm_id=" + regId + "&device_id=" + imei;
         Log.d(TAG, link);
         wv.getSettings().setUserAgentString("dk.dtu.imm.datacollector2013");
         wv.loadUrl(link);

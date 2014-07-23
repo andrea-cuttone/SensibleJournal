@@ -68,9 +68,6 @@ public class RegistrationHandler extends Service {
      */
     public static final long REGISTRATION_EXPIRY_TIME_MS = 7 * DAY;
 
-    public static final String CLIENT_ID= "9f5fd6e9dda30e4cd7a91eb910560b";
-    private static final String CLIENT_SECRET = "";
-
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
     Context context;
@@ -372,8 +369,8 @@ public class RegistrationHandler extends Service {
                 //?code=14e3b14e5759095cc7d74f169eac23&client_id=77a102b767a4b9ed0de963903aac32&client_secret=4190e63044c6b4687496261d44469d
                 try {
                     ArrayList<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>();
-                    nameValuePairs.add(new BasicNameValuePair("client_id", CLIENT_ID));
-                    nameValuePairs.add(new BasicNameValuePair("client_secret", CLIENT_SECRET));
+                    nameValuePairs.add(new BasicNameValuePair("client_id", ClientSecrets.CLIENT_ID));
+                    nameValuePairs.add(new BasicNameValuePair("client_secret", ClientSecrets.CLIENT_SECRET));
                     TelephonyManager tm = (TelephonyManager)context.getSystemService(TELEPHONY_SERVICE);
                     String imei = tm.getDeviceId();
                     nameValuePairs.add(new BasicNameValuePair("device_id", imei));
