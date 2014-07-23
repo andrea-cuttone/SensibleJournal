@@ -1,8 +1,0 @@
-SensibleJournal creates dynamic, interactive visualisations of your data collected in the SensibleDTU project: http://www.sensible.dtu.dk/
-
-The 2014 version provides cards showing your daily movements and visited places.
-Click a card to show an interactive view. 
-
-More visualizations coming soon!
-
-Please send questions, suggestions, problem reports to sensible_help@imm.dtu.dk
