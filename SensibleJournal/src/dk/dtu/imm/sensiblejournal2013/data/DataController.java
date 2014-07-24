@@ -182,8 +182,7 @@ public class DataController {
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
         nameValuePairs.add(new BasicNameValuePair("bearer_token", token));
         nameValuePairs.add(new BasicNameValuePair("appid", "sensiblejournal"));
-        nameValuePairs.add(new BasicNameValuePair("events", eventBuffer.toString()));
-        //nameValuePairs.add(new BasicNameValuePair("events", "[[10, \"ZZZ\"]]"));			
+        nameValuePairs.add(new BasicNameValuePair("events", eventBuffer.toString()));			
 		
 		// Get an SSL secured HTTP client from the HttpUtils
 		Constants.httpClient = HttpUtils.getNewHttpClient();
@@ -191,12 +190,12 @@ public class DataController {
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		HttpResponse response = Constants.httpClient.execute(httpPost);
 		if (response.getStatusLine().getStatusCode() == org.apache.http.HttpStatus.SC_OK) {
-			Log.d("Usage log", "Usage log uploaded successfully");
+			Log.d(Constants.APP_NAME, "Usage log uploaded successfully");
 			Editor editor = sharedPrefs.edit();
 			editor.putLong(LAST_UPLOADED_TIMESTAMP, lastUploadedTimestamp);
 			editor.commit();
 		} else {
-			Log.e("Usage log", "Usage log failed:" + response.getStatusLine());
+			Log.e(Constants.APP_NAME, "Usage log failed:" + response.getStatusLine());
 		}
 		
 	}

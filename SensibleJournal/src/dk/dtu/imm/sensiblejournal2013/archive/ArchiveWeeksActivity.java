@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,29 +75,34 @@ public class ArchiveWeeksActivity extends Activity {
 		for (int i=0; i<days.size(); i++){						
 			try {
 				date = formatter.parse((String) days.get(i));
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-			cal.setTime(date);
-			
-			if (((String) days.get(i)).substring(0, 3).equals("Sun")) {
-				cal.add(Calendar.DAY_OF_YEAR, -1);
-			}
-			
-			if (!Integer.toString(cal.get(Calendar.WEEK_OF_YEAR)).equals(tmpWeekNumber)) {												
-				tmpWeekNumber = Integer.toString(cal.get(Calendar.WEEK_OF_YEAR));
-				// Get the starting and ending dates of the week
-	    		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM", Locale.ROOT);
-	    		Calendar cal = Calendar.getInstance();
-	    		cal.clear();
-	    		cal.setFirstDayOfWeek(Calendar.MONDAY);
-	    		cal.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(tmpWeekNumber)); 
-	    		cal.set(Calendar.YEAR, Integer.parseInt(selectedYear));	
-	    		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-	    		String date1 = sdf.format(cal.getTime());
-	    		cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-	    		String date2 = sdf.format(cal.getTime());
-				weeks.add("Week " + tmpWeekNumber + "\n" + date1 + " - " + date2);
+				cal.setTime(date);
+
+				if (((String) days.get(i)).substring(0, 3).equals("Sun")) {
+					cal.add(Calendar.DAY_OF_YEAR, -1);
+				}
+
+				if (!Integer.toString(cal.get(Calendar.WEEK_OF_YEAR)).equals(
+						tmpWeekNumber)) {
+					tmpWeekNumber = Integer.toString(cal
+							.get(Calendar.WEEK_OF_YEAR));
+					// Get the starting and ending dates of the week
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM",
+							Locale.ROOT);
+					Calendar cal = Calendar.getInstance();
+					cal.clear();
+					cal.setFirstDayOfWeek(Calendar.MONDAY);
+					cal.set(Calendar.WEEK_OF_YEAR,
+							Integer.parseInt(tmpWeekNumber));
+					cal.set(Calendar.YEAR, Integer.parseInt(selectedYear));
+					cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+					String date1 = sdf.format(cal.getTime());
+					cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+					String date2 = sdf.format(cal.getTime());
+					weeks.add("Week " + tmpWeekNumber + "\n" + date1 + " - "
+							+ date2);
+				}
+			} catch (ParseException exc) {
+				Log.e(Constants.APP_NAME, exc.toString());
 			}
 	
 		}
