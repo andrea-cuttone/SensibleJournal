@@ -77,25 +77,28 @@ public class CardListFragment extends android.support.v4.app.Fragment implements
 
 	// The application starts when it is verified that it is connected to the Google Play Services
 	@Override
-	public void onConnected(Bundle arg0) {        
-		Constants.myLocation = mLocationClient.getLastLocation();
-		
-		if (Constants.newDataFetched) {
-			Constants.cards = null;
-			Constants.mostVisitedCard = null;
-			Constants.todaysItCard = null;
-			Constants.weeklyItCard = null;
-			Constants.myCurrentLocationCard = null;
-			Constants.pastStopCard = null;
-			Constants.commuteCard = null;
-			Constants.FEED_COUNTER = 1;
-			Constants.refreshed = true;
-			try {
-				if(!getActivity().isFinishing()){ Constants.progressDialog = ProgressDialog.show(getActivity(), "", "Loading. Please wait..."); }
-			} catch (Exception e) { e.printStackTrace(); }
+	public void onConnected(Bundle arg0) {
+		// http://stackoverflow.com/questions/23032966/not-connected-call-connect-or-wait-for-onconnected-to-be-called-exception-ins
+		if(mLocationClient.isConnected()) {
+			Constants.myLocation = mLocationClient.getLastLocation();
+			
+			if (Constants.newDataFetched) {
+				Constants.cards = null;
+				Constants.mostVisitedCard = null;
+				Constants.todaysItCard = null;
+				Constants.weeklyItCard = null;
+				Constants.myCurrentLocationCard = null;
+				Constants.pastStopCard = null;
+				Constants.commuteCard = null;
+				Constants.FEED_COUNTER = 1;
+				Constants.refreshed = true;
+				try {
+					if(!getActivity().isFinishing()){ Constants.progressDialog = ProgressDialog.show(getActivity(), "", "Loading. Please wait..."); }
+				} catch (Exception e) { e.printStackTrace(); }
+			}
+			CardRefreshTask rTask = new CardRefreshTask(getActivity());
+			rTask.execute();	
 		}
-		CardRefreshTask rTask = new CardRefreshTask(getActivity());
-		rTask.execute();
 	}
 		
 	@Override

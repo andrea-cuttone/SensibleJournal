@@ -399,15 +399,17 @@ public class DataController {
 				c = db.rawQuery(query, null);
 				c.moveToFirst();
 				
-				POI_id.add(Integer.parseInt(c.getString(1)));
-				location = new Location("temporary");
-				location.setLatitude(c.getFloat(4));
-				location.setLongitude(c.getFloat(5));
-				locations.add(location);
-				tmpDateArr = new Date(c.getLong(6));
-				tmpDateDep = new Date(c.getLong(7));
-				arrivals.add(tmpDateArr);
-				departures.add(tmpDateDep);
+				if (c.isAfterLast() == false) {
+					POI_id.add(Integer.parseInt(c.getString(1)));
+					location = new Location("temporary");
+					location.setLatitude(c.getFloat(4));
+					location.setLongitude(c.getFloat(5));
+					locations.add(location);
+					tmpDateArr = new Date(c.getLong(6));
+					tmpDateDep = new Date(c.getLong(7));
+					arrivals.add(tmpDateArr);
+					departures.add(tmpDateDep);
+				}
 			}
 			
 			c.close();
