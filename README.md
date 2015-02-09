@@ -1,6 +1,7 @@
-# SensibleJournal
+# SensibleJournal 2014
 
 SensibleJournal creates dynamic, interactive visualisations of your data collected in the SensibleDTU project: http://www.sensible.dtu.dk/
+
 
 ## Setup
 
