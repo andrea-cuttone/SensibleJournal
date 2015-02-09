@@ -2,6 +2,7 @@
 
 SensibleJournal creates dynamic, interactive visualisations of your data collected in the SensibleDTU project: http://www.sensible.dtu.dk/
 
+SensibleJournal was developed as part of Georgios Chatzigeorgakidis' [Master thesis](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6833).
 
 ## Setup
 
