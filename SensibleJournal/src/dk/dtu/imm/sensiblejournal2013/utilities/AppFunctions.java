@@ -1049,18 +1049,17 @@ public class AppFunctions {
 	// Method that sets the alarms for automatic data fetching and notification
 	public void setAlarms(Context context) {
 		Calendar calendar = Calendar.getInstance();
-
+		
 		// Set repeating alarm for notifying the user
-		calendar.set(Calendar.HOUR_OF_DAY, 12);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
+//		calendar.set(Calendar.HOUR_OF_DAY, 12);
+//		calendar.set(Calendar.MINUTE, 0);
+//		calendar.set(Calendar.SECOND, 0);
 		Intent notification = new Intent(context, NotificationReceiver.class);
 		notificationPendingIntent = PendingIntent.getBroadcast(context, 0, notification, PendingIntent.FLAG_CANCEL_CURRENT);
 		alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.cancel(notificationPendingIntent);
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 3*AlarmManager.INTERVAL_DAY,
-																	3*AlarmManager.INTERVAL_DAY, notificationPendingIntent);
-		// alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 10000, 10000, notificationPendingIntent);
+//		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 3*AlarmManager.INTERVAL_DAY,
+//																	3*AlarmManager.INTERVAL_DAY, notificationPendingIntent);
 
 		// Set repeating alarm for fetching data from server
 		int hours = 10 + (int) (Math.random() * ((12 - 10) + 1));

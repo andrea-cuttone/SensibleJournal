@@ -13,7 +13,7 @@ import dk.dtu.imm.sensiblejournal2013.utilities.Constants;
 public class NotificationReceiver extends BroadcastReceiver {
 	 @Override
 	    public void onReceive(Context context, Intent intent) {
-	    	sendNotification("SensibleJournal", "You have new cards!", context);
+	    	//sendNotification("SensibleJournal", "You have new cards!", context);
 	    }
 	    
 	    @SuppressWarnings("deprecation")
